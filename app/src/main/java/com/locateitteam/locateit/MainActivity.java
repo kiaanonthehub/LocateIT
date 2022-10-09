@@ -38,15 +38,13 @@ public class MainActivity extends AppCompatActivity {
                 {
                     init();
                 }
-
             }
         });
-
     }
 
     private void init()
     {
-
+        //
     }
 
     // check if the user has the correct google play services version installed
