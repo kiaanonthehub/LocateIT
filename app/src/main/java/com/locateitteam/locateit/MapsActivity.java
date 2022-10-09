@@ -1,6 +1,7 @@
 package com.locateitteam.locateit;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -42,7 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
     // component fields
-    private Button btn;
+    private Button btn,btnSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         btn = findViewById(R.id.goTo);
+        btnSettings = findViewById(R.id.btnSettings);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +61,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 LatLng london = new LatLng(51.5072, 0.1276);
                 mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
+            }
+        });
+
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MapsActivity.this, SettingsActivity.class);
+                startActivity(i);
             }
         });
 
