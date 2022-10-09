@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">LocateIT</string>
     <string name="google_api_key">AIzaSyBYN_3H5YuJXZBKj58-fcn3l1Lj_UmTFCI</string>
+
+    <string-array name="MetricSelections">
+        <item>Kilometers</item>
+        <item>Miles</item>
+    </string-array>
 </resources>
