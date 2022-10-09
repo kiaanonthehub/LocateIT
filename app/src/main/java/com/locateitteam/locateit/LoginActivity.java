@@ -15,30 +15,26 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button login;
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
-
+    private Button LoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        login = findViewById(R.id.btnlogin);
+        LoginButton = findViewById(R.id.btnLogin);
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, MapsActivity.class);
-                startActivity(i);
+    LoginButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
+            startActivity(intent);
+        }
+    });
 
-                if(isServicesOK())
-                {
-                    init();
-                }
-            }
-        });
+
     }
 
     private void init()
