@@ -12,9 +12,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.GoogleApiAvailabilityLight;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     Button login;
     private static final String TAG = "MainActivity";
@@ -24,14 +23,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         login = findViewById(R.id.btnlogin);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, MapsActivity.class);
+                Intent i = new Intent(LoginActivity.this, MapsActivity.class);
                 startActivity(i);
 
                 if(isServicesOK())
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     // check if the user has the correct google play services version installed
     public boolean isServicesOK()
     {
-        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(LoginActivity.this);
 
         if(available == ConnectionResult.SUCCESS)
         {
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         {
             // an error occured but can be resolved
             Log.d(TAG,"isServicesOK: an error occured but can be resolved");
-            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this,available,ERROR_DIALOG_REQUEST);
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(LoginActivity.this,available,ERROR_DIALOG_REQUEST);
             dialog.show();
         }else{
             Toast.makeText(this, "Map request cannot be performed", Toast.LENGTH_SHORT).show();
