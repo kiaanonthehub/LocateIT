@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "478152094695",
+    "project_id": "locateit-9c1c0",
+    "storage_bucket": "locateit-9c1c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478152094695:android:537dcce570286f1c13c342",
+        "android_client_info": {
+          "package_name": "com.locateitteam.locateit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478152094695-nhd1dbiiuga206ebrckoh4e52c1f532e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBmwUeJk7fQ22SwZTQgcGVOYH5Y_wvCYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478152094695-nhd1dbiiuga206ebrckoh4e52c1f532e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
