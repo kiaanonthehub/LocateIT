@@ -3,10 +3,13 @@ package com.locateitteam.locateit;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,6 +29,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.locateitteam.locateit.databinding.ActivityMapsBinding;
 
+import java.io.IOException;
+import java.util.List;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     // declare and initialise fields
@@ -39,11 +45,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     // map fields
     private GoogleMap mMap;
+    private SupportMapFragment mapFragment;
     private ActivityMapsBinding binding;
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
     // component fields
     private Button btn,btnSettings;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +61,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(binding.getRoot());
         btn = findViewById(R.id.goTo);
         btnSettings = findViewById(R.id.btnSettings);
+        searchView = findViewById(R.id.svlocation);
+        mapFragment = (SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                String location = searchView.getQuery().toString();
+                List<Address> addressLst = null;
+
+                if (location != null || location == ""){
+                    Geocoder geocoder = new Geocoder(MapsActivity.this);
+
+                    try{
+                        addressLst = geocoder.getFromLocationName(location,1);
+                        if(addressLst.size() != 0){
+                            Address address = addressLst.get(0);
+                            LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
+                            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in "+ location));
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                        }else{
+
+                        }
+                    }catch(IOException e){
+
+                    }
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+
+
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
