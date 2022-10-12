@@ -23,15 +23,18 @@ public class FirebaseUtil {
     private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     // method to write to firebase
-    public static void WriteToFirebase(SettingModel settings){
+    public static void WriteToFirebase(SettingModel settings) {
 
+        // database reference instance
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Settings").child(CurrentUser.userId).setValue(settings);
     }
 
     // method to read from firebase
-    public static SettingModel ReadFromFirebase(){
+    public static SettingModel ReadFromFirebase() {
 
-        // clear list - reusablility
+        // database reference instance
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // isntantiate settings obj
         SettingModel settingModel = new SettingModel();
