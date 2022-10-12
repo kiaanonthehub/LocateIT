@@ -7,4 +7,13 @@
         <item>Kilometers</item>
         <item>Miles</item>
     </string-array>
+
+    <string-array name="FilteredLocations">
+        <item>Groceries</item>
+        <item>Petrol</item>
+        <item>ATMs</item>
+        <item>Restaurants</item>
+        <item>Shopping Centres</item>
+    </string-array>
+
 </resources>
