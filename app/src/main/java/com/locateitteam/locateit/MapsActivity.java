@@ -41,6 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private LatLng deviceLatlong;
     private boolean mLocationPermissionGranted = false;
 
     // map fields
@@ -52,9 +53,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // component fields
     private Button btnAtm,btnRestaurants,btnPetrol,btnSettings;
     private SearchView searchView;
-
-    // deaclare var
-    private  double lat , lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +85,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
                             mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in "+ location));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-
-
                         }else{
 
                         }
@@ -110,8 +106,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnAtm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                FindPlaceType("school");
+                FindPlaceType("atm");
 
 //                FindPlaceType(btnAtm.getText().toString());
 //                Toast.makeText(MapsActivity.this, ""+btnAtm.getText().toString(), Toast.LENGTH_SHORT).show();
@@ -125,10 +120,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnRestaurants.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Add a marker and cordinates in to find atm and move the camera
-                LatLng london = new LatLng(51.5072, 0.1276);
-                mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
+                FindPlaceType("restaurant");
+
             }
         });
 
@@ -136,9 +129,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
                 // Add a marker and cordinates in to find atm and move the camera
-                LatLng london = new LatLng(51.5072, 0.1276);
-                mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
+                //LatLng london = new LatLng(51.5072, 0.1276);
+                //mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
+                //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
+
+                FindPlaceType("gas_station");
+                Toast.makeText(MapsActivity.this, "ghghghhghg", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -217,10 +213,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (task.isSuccessful()) {
                         Location cLocation = (Location) task.getResult();
                         LatLng currentLatLng = new LatLng(cLocation.getLatitude(), cLocation.getLongitude());
-
-                        lat = cLocation.getLatitude();
-                        lng = cLocation.getLongitude();
-
+                        deviceLatlong = currentLatLng;
                         moveCamera(currentLatLng, 15);
 
                     } else {
@@ -258,6 +251,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void FindPlaceType(String place){
 
+        // deaclare var
+        double lat = deviceLatlong.latitude, lng=deviceLatlong.longitude;
+
         StringBuilder stringBuilder = new
                 StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
 
@@ -265,7 +261,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         stringBuilder.append("&radius=1000");
         stringBuilder.append("&type="+place);
         stringBuilder.append("&sensor=true");
-        stringBuilder.append("&key="+getResources().getString(R.string.google_api_maps_key));
+        stringBuilder.append("&key="+getResources().getString(R.string.google_api_key_places));
 
         String url = stringBuilder.toString();
         Object dataFetch[] = new Object[2];
