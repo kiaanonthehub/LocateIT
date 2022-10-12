@@ -27,7 +27,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.locateitteam.locateit.Model.GeoLatLongModel;
 import com.locateitteam.locateit.databinding.ActivityMapsBinding;
 
 import java.io.IOException;
