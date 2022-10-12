@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.locateitteam.locateit.Model.GeoLatLongModel;
 import com.locateitteam.locateit.databinding.ActivityMapsBinding;
 
 import java.io.IOException;
@@ -41,6 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private LatLng deviceLatlong;
     private boolean mLocationPermissionGranted = false;
 
     // map fields
@@ -107,7 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View view) {
 
                 // deaclare var
-                double lat = 1, lng=1;
+                double lat = deviceLatlong.latitude, lng=deviceLatlong.longitude;
 
                 StringBuilder stringBuilder = new
                         StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
@@ -116,7 +118,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 stringBuilder.append("&radius=1000");
                 stringBuilder.append("&type=Petrol");
                 stringBuilder.append("&sensor=true");
-                stringBuilder.append("&key="+getResources().getString(R.string.google_api_key));
+                stringBuilder.append("&key="+getResources().getString(R.string.google_api_key_places));
 
                 String url = stringBuilder.toString();
                 Object dataFetch[] = new Object[2];
@@ -230,6 +232,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (task.isSuccessful()) {
                         Location cLocation = (Location) task.getResult();
                         LatLng currentLatLng = new LatLng(cLocation.getLatitude(), cLocation.getLongitude());
+                        deviceLatlong = currentLatLng;
                         moveCamera(currentLatLng, 15);
 
                     } else {
