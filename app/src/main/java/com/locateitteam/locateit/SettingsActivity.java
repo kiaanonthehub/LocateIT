@@ -16,7 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
     //Variables
     public boolean isMiles = false;
     //Components
-    Spinner spinnerMetric;
+    Spinner spinnerMetric,spinnerPreferredLandmark;
     Button btnSave;
 
     @Override
@@ -27,16 +27,21 @@ public class SettingsActivity extends AppCompatActivity {
         // initialise components
         spinnerMetric = findViewById(R.id.spinnerMetricSetting);
         btnSave = findViewById(R.id.btnSaveSettings);
+        spinnerPreferredLandmark = findViewById(R.id.spinnerFilteredLocation);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SettingsActivity.this, R.array.MetricSelections, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerMetric.setAdapter(adapter);
 
+        ArrayAdapter<CharSequence> landmarkAdapter = ArrayAdapter.createFromResource(SettingsActivity.this, R.array.FilteredLocations, android.R.layout.simple_spinner_item);
+        landmarkAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinnerPreferredLandmark.setAdapter(landmarkAdapter);
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Global.metricSelection = spinnerMetric.getSelectedItem().toString();
-                Toast.makeText(SettingsActivity.this, "Saved as " + spinnerMetric.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SettingsActivity.this, "Saved as: " + spinnerMetric.getSelectedItem().toString() + " ,Preferred Landmark: "+ spinnerPreferredLandmark.getSelectedItem().toString() , Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(SettingsActivity.this, MapsActivity.class);
                 startActivity(i);
             }
