@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">LocateIT</string>
-    <string name="google_api_key">AIzaSyBYN_3H5YuJXZBKj58-fcn3l1Lj_UmTFCI</string>
-    <string name="connectionString">https://locateit-e2db1-default-rtdb.firebaseio.com/</string>
+<!--    <string name="google_api_key">AIzaSyBYN_3H5YuJXZBKj58-fcn3l1Lj_UmTFCI</string>-->
+<!--    <string name="connectionString">https://locateit-e2db1-default-rtdb.firebaseio.com/</string>-->
 
     <string-array name="MetricSelections">
         <item>Kilometers</item>
