@@ -106,26 +106,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnAtm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                // deaclare var
-                double lat = deviceLatlong.latitude, lng=deviceLatlong.longitude;
-
-                StringBuilder stringBuilder = new
-                        StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-
-                stringBuilder.append("location="+lat+","+lng);
-                stringBuilder.append("&radius=1000");
-                stringBuilder.append("&type=Petrol");
-                stringBuilder.append("&sensor=true");
-                stringBuilder.append("&key="+getResources().getString(R.string.google_api_key_places));
-
-                String url = stringBuilder.toString();
-                Object dataFetch[] = new Object[2];
-                dataFetch[0] = mMap;
-                dataFetch[1] = url;
-
-                FetchData fetchData = new FetchData();
-                fetchData.execute(dataFetch);
+                FindPlaceType("atm");
 
 //                FindPlaceType(btnAtm.getText().toString());
 //                Toast.makeText(MapsActivity.this, ""+btnAtm.getText().toString(), Toast.LENGTH_SHORT).show();
@@ -139,10 +120,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnRestaurants.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Add a marker and cordinates in to find atm and move the camera
-                LatLng london = new LatLng(51.5072, 0.1276);
-                mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
+                FindPlaceType("restaurant");
+
             }
         });
 
@@ -150,9 +129,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
                 // Add a marker and cordinates in to find atm and move the camera
-                LatLng london = new LatLng(51.5072, 0.1276);
-                mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
+                //LatLng london = new LatLng(51.5072, 0.1276);
+                //mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
+                //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
+
+                FindPlaceType("gas_station");
+                Toast.makeText(MapsActivity.this, "ghghghhghg", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -270,16 +252,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void FindPlaceType(String place){
 
         // deaclare var
-        double lat = 0.0, lng=0.0;
+        double lat = deviceLatlong.latitude, lng=deviceLatlong.longitude;
 
         StringBuilder stringBuilder = new
-                StringBuilder("http://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+                StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
 
         stringBuilder.append("location="+lat+","+lng);
         stringBuilder.append("&radius=1000");
-        stringBuilder.append("&type=ATMs");
+        stringBuilder.append("&type="+place);
         stringBuilder.append("&sensor=true");
-        stringBuilder.append("&key="+getResources().getString(R.string.google_api_key));
+        stringBuilder.append("&key="+getResources().getString(R.string.google_api_key_places));
 
         String url = stringBuilder.toString();
         Object dataFetch[] = new Object[2];
