@@ -2,9 +2,6 @@ package com.locateitteam.locateit.Util;
 
 public class Global {
 
-    public static String metricSelection;
-    public static String filteredLocation;
-
     public static double calcMiles(double value) {
 
         return 0;

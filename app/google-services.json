@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "478152094695",
-    "project_id": "locateit-9c1c0",
-    "storage_bucket": "locateit-9c1c0.appspot.com"
+    "project_number": "545814222598",
+    "firebase_url": "https://locateit-e2db1-default-rtdb.firebaseio.com",
+    "project_id": "locateit-e2db1",
+    "storage_bucket": "locateit-e2db1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:478152094695:android:537dcce570286f1c13c342",
+        "mobilesdk_app_id": "1:545814222598:android:8c6f746c8e0e148282b087",
         "android_client_info": {
           "package_name": "com.locateitteam.locateit"
         }
       },
       "oauth_client": [
         {
-          "client_id": "478152094695-nhd1dbiiuga206ebrckoh4e52c1f532e.apps.googleusercontent.com",
+          "client_id": "545814222598-mff6h7fidm5jmrjkdfiu5uh0op7ep5hd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCBmwUeJk7fQ22SwZTQgcGVOYH5Y_wvCYk"
+          "current_key": "AIzaSyArD7I8_g9K2nJnPVyt4YCjILk9W5Sj_9Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "478152094695-nhd1dbiiuga206ebrckoh4e52c1f532e.apps.googleusercontent.com",
+              "client_id": "545814222598-mff6h7fidm5jmrjkdfiu5uh0op7ep5hd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

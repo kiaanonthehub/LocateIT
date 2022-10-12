@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.locateitteam.locateit.Model.SettingModel;
+import com.locateitteam.locateit.Util.CurrentUser;
+import com.locateitteam.locateit.Util.FirebaseUtil;
 import com.locateitteam.locateit.Util.Global;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -40,10 +43,21 @@ public class SettingsActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Global.metricSelection = spinnerMetric.getSelectedItem().toString();
+
+                // get the users selection from the ui and populate the current users settings
+                CurrentUser.metricSelection = spinnerMetric.getSelectedItem().toString();
+                CurrentUser.filteredLocation = spinnerPreferredLandmark.getSelectedItem().toString();
+
+                SettingModel s = new SettingModel(CurrentUser.metricSelection , CurrentUser.filteredLocation);
+                // write to firebase
+                FirebaseUtil.WriteToFirebase(s);
+
+                //new SettingModel(CurrentUser.metricSelection, CurrentUser.filteredLocation)
+
+                // test
                 Toast.makeText(SettingsActivity.this, "Saved as: " + spinnerMetric.getSelectedItem().toString() + " ,Preferred Landmark: "+ spinnerPreferredLandmark.getSelectedItem().toString() , Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(SettingsActivity.this, MapsActivity.class);
-                startActivity(i);
+//                Intent i = new Intent(SettingsActivity.this, MapsActivity.class);
+//                startActivity(i);
             }
         });
 
