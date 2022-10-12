@@ -24,6 +24,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -251,6 +252,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void FindPlaceType(String place){
 
+        mMap.clear();
         // deaclare var
         double lat = deviceLatlong.latitude, lng=deviceLatlong.longitude;
 
