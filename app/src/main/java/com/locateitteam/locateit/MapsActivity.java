@@ -53,6 +53,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button btnAtm,btnRestaurants,btnPetrol,btnSettings;
     private SearchView searchView;
 
+    // deaclare var
+    private  double lat , lng;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +87,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
                             mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in "+ location));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+
+
                         }else{
 
                         }
@@ -106,25 +111,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
 
-                // deaclare var
-                double lat = 1, lng=1;
-
-                StringBuilder stringBuilder = new
-                        StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-
-                stringBuilder.append("location="+lat+","+lng);
-                stringBuilder.append("&radius=1000");
-                stringBuilder.append("&type=Petrol");
-                stringBuilder.append("&sensor=true");
-                stringBuilder.append("&key="+getResources().getString(R.string.google_api_key));
-
-                String url = stringBuilder.toString();
-                Object dataFetch[] = new Object[2];
-                dataFetch[0] = mMap;
-                dataFetch[1] = url;
-
-                FetchData fetchData = new FetchData();
-                fetchData.execute(dataFetch);
+                FindPlaceType("school");
 
 //                FindPlaceType(btnAtm.getText().toString());
 //                Toast.makeText(MapsActivity.this, ""+btnAtm.getText().toString(), Toast.LENGTH_SHORT).show();
@@ -230,6 +217,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (task.isSuccessful()) {
                         Location cLocation = (Location) task.getResult();
                         LatLng currentLatLng = new LatLng(cLocation.getLatitude(), cLocation.getLongitude());
+
+                        lat = cLocation.getLatitude();
+                        lng = cLocation.getLongitude();
+
                         moveCamera(currentLatLng, 15);
 
                     } else {
@@ -267,17 +258,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void FindPlaceType(String place){
 
-        // deaclare var
-        double lat = 0.0, lng=0.0;
-
         StringBuilder stringBuilder = new
-                StringBuilder("http://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+                StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
 
         stringBuilder.append("location="+lat+","+lng);
         stringBuilder.append("&radius=1000");
-        stringBuilder.append("&type=ATMs");
+        stringBuilder.append("&type="+place);
         stringBuilder.append("&sensor=true");
-        stringBuilder.append("&key="+getResources().getString(R.string.google_api_key));
+        stringBuilder.append("&key="+getResources().getString(R.string.google_api_maps_key));
 
         String url = stringBuilder.toString();
         Object dataFetch[] = new Object[2];
