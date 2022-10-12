@@ -1,5 +1,6 @@
 package com.locateitteam.locateit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,10 +11,16 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.locateitteam.locateit.Model.SettingModel;
 import com.locateitteam.locateit.Util.CurrentUser;
 import com.locateitteam.locateit.Util.FirebaseUtil;
 import com.locateitteam.locateit.Util.Global;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SettingsActivity extends AppCompatActivity {
     //Variables
@@ -40,27 +47,43 @@ public class SettingsActivity extends AppCompatActivity {
         landmarkAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerPreferredLandmark.setAdapter(landmarkAdapter);
 
+        FirebaseUtil.mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                List<String> list = new ArrayList<>();
+
+                // iterate through the obj pulled from firebase
+                for(DataSnapshot mySnapshot: snapshot.getChildren()){
+
+                    list.add(mySnapshot.getValue().toString());
+                }
+
+                // comment this link https://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
+                int spinnerPosition = adapter.getPosition(list.get(0));
+                spinnerMetric.setSelection(spinnerPosition);
+
+                spinnerPosition = landmarkAdapter.getPosition(list.get(1));
+                spinnerPreferredLandmark.setSelection(spinnerPosition);
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 // get the users selection from the ui and populate the current users settings
-           //     CurrentUser.metricSelection = spinnerMetric.getSelectedItem().toString();
-            //    CurrentUser.filteredLocation = spinnerPreferredLandmark.getSelectedItem().toString();
+                CurrentUser.metricSelection = spinnerMetric.getSelectedItem().toString();
+                CurrentUser.filteredLocation = spinnerPreferredLandmark.getSelectedItem().toString();
 
-             //   SettingModel s = new SettingModel(CurrentUser.metricSelection , CurrentUser.filteredLocation);
                 // write to firebase
-            //    FirebaseUtil.WriteToFirebase(s);
+                FirebaseUtil.WriteToFirebase(new SettingModel(CurrentUser.metricSelection, CurrentUser.filteredLocation));
 
-                //new SettingModel(CurrentUser.metricSelection, CurrentUser.filteredLocation)
-
-                // test
-           //     Toast.makeText(SettingsActivity.this, "Saved as: " + spinnerMetric.getSelectedItem().toString() + " ,Preferred Landmark: "+ spinnerPreferredLandmark.getSelectedItem().toString() , Toast.LENGTH_SHORT).show();
-
-                Toast.makeText(SettingsActivity.this, "Hello Hoe:"+FirebaseUtil.ReadFromFirebase().getPreferredLandmark()+"\t"+FirebaseUtil.ReadFromFirebase().getMetric(), Toast.LENGTH_SHORT).show();
-//
-//                Intent i = new Intent(SettingsActivity.this, MapsActivity.class);
-//                startActivity(i);
+                Intent i = new Intent(SettingsActivity.this, MapsActivity.class);
+                startActivity(i);
             }
         });
 

@@ -20,21 +20,18 @@ import java.util.List;
 public class FirebaseUtil {
 
     // firebase obj
-    private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    public static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Settings").child(CurrentUser.userId);
 
     // method to write to firebase
-    public static void WriteToFirebase(SettingModel settings) {
+    public static void WriteToFirebase(SettingModel settings){
 
-        // database reference instance
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Settings").child(CurrentUser.userId).setValue(settings);
+        mDatabase.setValue(settings);
     }
 
     // method to read from firebase
-    public static SettingModel ReadFromFirebase() {
+    public static SettingModel ReadFromFirebase(){
 
-        // database reference instance
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        // clear list - reusablility
 
         // isntantiate settings obj
         SettingModel settingModel = new SettingModel();
@@ -42,20 +39,19 @@ public class FirebaseUtil {
         // declare and initalise list
         List<SettingModel> lstSettingsModel = null;
 
-        // get the current
-        mDatabase = mDatabase.child("Settings").child(CurrentUser.userId);
-
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                lstSettingsModel.add(snapshot.getValue(SettingModel.class));
-            }
+                // iterate through the obj pulled from firebase
+                for(DataSnapshot mySnapshot: snapshot.getChildren()){
 
+                    // store the firebase obj to temp list and return
+                    lstSettingsModel.add(mySnapshot.getValue(SettingModel.class));
+                }
+            }
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
 
         // list will alway contain one element which is index 0
