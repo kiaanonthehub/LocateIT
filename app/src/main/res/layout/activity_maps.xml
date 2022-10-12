@@ -31,24 +31,53 @@
         app:layout_constraintVertical_bias="0.124" />
 
     <Button
-        android:id="@+id/goTo"
-        android:layout_width="150dp"
-        android:layout_height="74dp"
+        android:id="@+id/goTo1"
+        android:layout_width="114dp"
+        android:layout_height="86dp"
         android:background="@color/white"
-        android:text="Go to London"
+        android:text="ATMs"
+        android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/map"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.22" />
+
+    <Button
+        android:id="@+id/goTo2"
+        android:layout_width="114dp"
+        android:layout_height="86dp"
+        android:background="@color/white"
+        android:text="Restaurants"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/map"
+        app:layout_constraintVertical_bias="0.22" />
+
+    <Button
+        android:id="@+id/goTo3"
+        android:layout_width="114dp"
+        android:layout_height="86dp"
+        android:background="@color/white"
+        android:text="Petrol"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/map"
+        app:layout_constraintVertical_bias="0.22" />
 
     <Button
         android:id="@+id/btnSettings"
-        android:layout_width="171dp"
-        android:layout_height="69dp"
+        android:layout_width="111dp"
+        android:layout_height="65dp"
         android:background="@color/white"
-        android:text="Go to Setting"
+        android:text="Settings"
         app:layout_constraintBottom_toBottomOf="@+id/map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

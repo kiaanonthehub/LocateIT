@@ -50,7 +50,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
     // component fields
-    private Button btn,btnSettings;
+    private Button btnAtm,btnRestaurants,btnPetrol,btnSettings;
     private SearchView searchView;
 
     @Override
@@ -59,7 +59,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        btn = findViewById(R.id.goTo);
+        btnAtm = findViewById(R.id.goTo1);
+        btnRestaurants = findViewById(R.id.goTo2);
+        btnPetrol = findViewById(R.id.goTo3);
         btnSettings = findViewById(R.id.btnSettings);
         searchView = findViewById(R.id.svlocation);
         mapFragment = (SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map);
@@ -71,6 +73,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 List<Address> addressLst = null;
 
                 if (location != null || location == ""){
+
+                    //https://youtu.be/R6hev9p_qW8
                     Geocoder geocoder = new Geocoder(MapsActivity.this);
 
                     try{
@@ -98,10 +102,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        btnAtm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Add a marker in Sydney and move the camera
+                // Add a marker and cordinates in to find atm and move the camera
+                LatLng london = new LatLng(51.5072, 0.1276);
+                mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
+            }
+        });
+
+        btnRestaurants.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Add a marker and cordinates in to find atm and move the camera
+                LatLng london = new LatLng(51.5072, 0.1276);
+                mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
+            }
+        });
+
+        btnPetrol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Add a marker and cordinates in to find atm and move the camera
                 LatLng london = new LatLng(51.5072, 0.1276);
                 mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
