@@ -20,12 +20,12 @@ import java.util.List;
 public class FirebaseUtil {
 
     // firebase obj
-    private static DatabaseReference mDatabase;
+    private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     // method to write to firebase
     public static void WriteToFirebase(SettingModel settings){
 
-        mDatabase.child(CurrentUser.userId).setValue(settings);
+        mDatabase.child("Settings").child(CurrentUser.userId).setValue(settings);
     }
 
     // method to read from firebase
@@ -40,21 +40,19 @@ public class FirebaseUtil {
         List<SettingModel> lstSettingsModel = null;
 
         // get the current
-        mDatabase = FirebaseDatabase.getInstance().getReference().child(CurrentUser.userId);
+        mDatabase = mDatabase.child("Settings").child(CurrentUser.userId);
 
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                // iterate through the obj pulled from firebase
-                for(DataSnapshot mySnapshot: snapshot.getChildren()){
-
-                    // store the firebase obj to temp list and return
-                    lstSettingsModel.add(mySnapshot.getValue(SettingModel.class));
-                }
+                lstSettingsModel.add(snapshot.getValue(SettingModel.class));
             }
+
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
 
         // list will alway contain one element which is index 0

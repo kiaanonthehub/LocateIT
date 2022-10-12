@@ -45,17 +45,20 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 // get the users selection from the ui and populate the current users settings
-                CurrentUser.metricSelection = spinnerMetric.getSelectedItem().toString();
-                CurrentUser.filteredLocation = spinnerPreferredLandmark.getSelectedItem().toString();
+           //     CurrentUser.metricSelection = spinnerMetric.getSelectedItem().toString();
+            //    CurrentUser.filteredLocation = spinnerPreferredLandmark.getSelectedItem().toString();
 
-                SettingModel s = new SettingModel(CurrentUser.metricSelection , CurrentUser.filteredLocation);
+             //   SettingModel s = new SettingModel(CurrentUser.metricSelection , CurrentUser.filteredLocation);
                 // write to firebase
-                FirebaseUtil.WriteToFirebase(s);
+            //    FirebaseUtil.WriteToFirebase(s);
 
                 //new SettingModel(CurrentUser.metricSelection, CurrentUser.filteredLocation)
 
                 // test
-                Toast.makeText(SettingsActivity.this, "Saved as: " + spinnerMetric.getSelectedItem().toString() + " ,Preferred Landmark: "+ spinnerPreferredLandmark.getSelectedItem().toString() , Toast.LENGTH_SHORT).show();
+           //     Toast.makeText(SettingsActivity.this, "Saved as: " + spinnerMetric.getSelectedItem().toString() + " ,Preferred Landmark: "+ spinnerPreferredLandmark.getSelectedItem().toString() , Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(SettingsActivity.this, "Hello Hoe:"+FirebaseUtil.ReadFromFirebase().getPreferredLandmark()+"\t"+FirebaseUtil.ReadFromFirebase().getMetric(), Toast.LENGTH_SHORT).show();
+//
 //                Intent i = new Intent(SettingsActivity.this, MapsActivity.class);
 //                startActivity(i);
             }
