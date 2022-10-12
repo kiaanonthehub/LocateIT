@@ -51,7 +51,7 @@ public class SignupActivity extends AppCompatActivity {
 
     // method to navigate the user to the login screen
     public void NavigateToLogin() {
-        Intent intent = new Intent(SignupActivity.this, MapsActivity.class);
+        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 
