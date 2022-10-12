@@ -105,10 +105,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnAtm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Add a marker and cordinates in to find atm and move the camera
-                LatLng london = new LatLng(51.5072, 0.1276);
-                mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
+
+                // deaclare var
+                double lat = 1, lng=1;
+
+                StringBuilder stringBuilder = new
+                        StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+
+                stringBuilder.append("location="+lat+","+lng);
+                stringBuilder.append("&radius=1000");
+                stringBuilder.append("&type=Petrol");
+                stringBuilder.append("&sensor=true");
+                stringBuilder.append("&key="+getResources().getString(R.string.google_api_key));
+
+                String url = stringBuilder.toString();
+                Object dataFetch[] = new Object[2];
+                dataFetch[0] = mMap;
+                dataFetch[1] = url;
+
+                FetchData fetchData = new FetchData();
+                fetchData.execute(dataFetch);
+
+//                FindPlaceType(btnAtm.getText().toString());
+//                Toast.makeText(MapsActivity.this, ""+btnAtm.getText().toString(), Toast.LENGTH_SHORT).show();
+//                // Add a marker and cordinates in to find atm and move the camera
+//                LatLng london = new LatLng(51.5072, 0.1276);
+//                mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
+//                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
             }
         });
 
@@ -240,5 +263,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
         getDeviceLocation();
+    }
+
+    public void FindPlaceType(String place){
+
+        // deaclare var
+        double lat = 0.0, lng=0.0;
+
+        StringBuilder stringBuilder = new
+                StringBuilder("http://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+
+        stringBuilder.append("location="+lat+","+lng);
+        stringBuilder.append("&radius=1000");
+        stringBuilder.append("&type=ATMs");
+        stringBuilder.append("&sensor=true");
+        stringBuilder.append("&key="+getResources().getString(R.string.google_api_key));
+
+        String url = stringBuilder.toString();
+        Object dataFetch[] = new Object[2];
+        dataFetch[0] = mMap;
+        dataFetch[1] = url;
+
+        FetchData fetchData = new FetchData();
+        fetchData.execute(dataFetch);
     }
 }
