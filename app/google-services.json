@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "545814222598-6ihi59t62toehhq0a9n1r787dh0g9c51.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.locateitteam.locateit",
+            "certificate_hash": "b2045d5d71d75c9df5ee0cb72b204ba880252e8c"
+          }
+        },
+        {
           "client_id": "545814222598-mff6h7fidm5jmrjkdfiu5uh0op7ep5hd.apps.googleusercontent.com",
           "client_type": 3
         }
