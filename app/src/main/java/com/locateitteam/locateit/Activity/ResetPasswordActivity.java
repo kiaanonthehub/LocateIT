@@ -1,4 +1,4 @@
-package com.locateitteam.locateit;
+package com.locateitteam.locateit.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.locateitteam.locateit.R;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 

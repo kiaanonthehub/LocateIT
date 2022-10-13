@@ -1,4 +1,4 @@
-package com.locateitteam.locateit;
+package com.locateitteam.locateit.GoogleAPI;
 
 import android.util.Log;
 

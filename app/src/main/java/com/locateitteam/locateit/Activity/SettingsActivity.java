@@ -1,4 +1,4 @@
-package com.locateitteam.locateit;
+package com.locateitteam.locateit.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,15 +9,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.locateitteam.locateit.Model.SettingModel;
+import com.locateitteam.locateit.R;
 import com.locateitteam.locateit.Util.CurrentUser;
 import com.locateitteam.locateit.Util.FirebaseUtil;
-import com.locateitteam.locateit.Util.Global;
 
 import java.util.ArrayList;
 import java.util.List;

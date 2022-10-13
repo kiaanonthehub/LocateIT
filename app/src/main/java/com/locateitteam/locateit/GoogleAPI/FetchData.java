@@ -1,4 +1,4 @@
-package com.locateitteam.locateit;
+package com.locateitteam.locateit.GoogleAPI;
 
 import android.os.AsyncTask;
 
@@ -14,7 +14,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class FetchData extends AsyncTask<Object, String, String> {
-
 
     String googleNearByPlaces;
     GoogleMap googleMap;

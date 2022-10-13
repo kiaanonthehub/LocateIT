@@ -17,7 +17,7 @@
         android:theme="@style/Theme.LocateIT"
         tools:targetApi="31">
         <activity
-            android:name=".ResetPasswordActivity"
+            android:name=".Activity.ResetPasswordActivity"
             android:exported="false" />
 
         <meta-data
@@ -25,16 +25,16 @@
             android:value="AIzaSyBYN_3H5YuJXZBKj58-fcn3l1Lj_UmTFCI" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".Activity.MapsActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".Activity.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".SignupActivity"
+            android:name=".Activity.SignupActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

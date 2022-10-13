@@ -1,12 +1,10 @@
-package com.locateitteam.locateit;
+package com.locateitteam.locateit.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,9 +12,9 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.locateitteam.locateit.Model.CURRENT_USER;
-import com.locateitteam.locateit.Model.User;
-import com.locateitteam.locateit.Model.dbHandler;
+import com.locateitteam.locateit.Model.UserModel;
+import com.locateitteam.locateit.R;
+import com.locateitteam.locateit.Util.CurrentUser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,15 +22,18 @@ import java.util.regex.Pattern;
 public class SignupActivity extends AppCompatActivity {
 
     private static final String TAG = "EmailPassword";
+
     // digit + lowercase char + uppercase char + punctuation + symbol
-    private static final String PASSWORD_PATTERN =
-            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+    private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
     private static final Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
-    // declare java variables
+
     private TextInputLayout inputLayoutName, inputLayoutSurname, inputLayoutEmail, inputLayoutPassword;
     private EditText etFirstname, etLastname, etEmail, etPassword;
+
     private FirebaseAuth mAuth;
-    private boolean flag = false;
+
+    boolean flag = false;
+
 
     public static boolean isValid(final String password) {
         Matcher matcher = pattern.matcher(password);
@@ -89,17 +90,12 @@ public class SignupActivity extends AppCompatActivity {
             createAccount(email, password);
 
             // instantiate a user object
-            User u = new User(firstname, lastname, email);
+            UserModel u = new UserModel(firstname, lastname, email);
 
             // initialise the current user
             getUsername();
 
-            // instantiate DbHandler object
-            dbHandler db = new dbHandler();
-
-            Toast.makeText(this, CURRENT_USER.displayName, Toast.LENGTH_SHORT).show();
-
-            db.writeToFirebase("User", CURRENT_USER.displayName, u);
+            Toast.makeText(this, CurrentUser.displayName, Toast.LENGTH_SHORT).show();
 
             // instantiate new intent object
             Intent intent = new Intent(SignupActivity.this, MapsActivity.class);
@@ -143,8 +139,8 @@ public class SignupActivity extends AppCompatActivity {
 
         String s = etEmail.getText().toString();
         String[] split = s.replace(".", "").split("@");
-        CURRENT_USER.displayName = split[0].toLowerCase();
-        CURRENT_USER.email = etEmail.getText().toString().toLowerCase();
+        CurrentUser.displayName = split[0].toLowerCase();
+        CurrentUser.email = etEmail.getText().toString().toLowerCase();
     }
 
     private boolean validateName() {
@@ -190,7 +186,7 @@ public class SignupActivity extends AppCompatActivity {
 
         String input = inputLayoutPassword.getEditText().getText().toString().trim();
 
-        if (input.isEmpty()|| input.length() <8 || input.matches("[0-9]")) {
+        if (input.isEmpty() || input.length() < 8 || input.matches("[0-9]")) {
             inputLayoutPassword.setError("Password is weak."
                     + "\n1. At least 8 characters"
                     + "\n2. A mixture of both uppercase and lowercase letters"

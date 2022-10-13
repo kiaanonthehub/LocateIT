@@ -1,6 +1,6 @@
 package com.locateitteam.locateit.Model;
 
-public class User {
+public class UserModel {
 
     // declare private variables
     private String firstname, lastname , email;
@@ -12,13 +12,13 @@ public class User {
     String Password;
 
     // class constructor - signup
-    public User(String firstname, String lastname, String email) {
+    public UserModel(String firstname, String lastname, String email) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
     }
-// getters and setters
 
+    // getters and setters
     public String getFirstname() {
 
         return firstname;

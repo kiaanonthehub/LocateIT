@@ -1,4 +1,4 @@
-package com.locateitteam.locateit;
+package com.locateitteam.locateit.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +21,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -31,7 +30,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
-import com.locateitteam.locateit.Model.CURRENT_USER;
+import com.locateitteam.locateit.R;
+import com.locateitteam.locateit.Util.CurrentUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -42,10 +42,12 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private Button btnLogin;
     private TextView tvSignup, tvForgottenPassword;
-    private FirebaseAuth mAuth;
+    private TextInputLayout inputLayoutemail, inputLayoutpassword;
+
     private GoogleSignInClient mGoogleSignInClient;
     private final static int RC_SIGN_IN = 123;
-    private TextInputLayout inputLayoutemail, inputLayoutpassword;
+
+    private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
     //Firebase Auth
@@ -126,8 +128,9 @@ public class LoginActivity extends AppCompatActivity {
 
         });
     }
-        // method to sign the user into the app
-        private void signIn (String email, String password){
+
+    // method to sign the user into the app
+    private void signIn (String email, String password){
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -158,7 +161,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
         }
-    //Google sign-in
 
     private void createRequest() {
 
@@ -172,7 +174,6 @@ public class LoginActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
     }
-
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -199,7 +200,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -214,7 +214,7 @@ public class LoginActivity extends AppCompatActivity {
                                 //Email address
                                 String email = user.getEmail();
                                 getGoogleUsername(email);
-                                Toast.makeText(LoginActivity.this, CURRENT_USER.displayName , Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, CurrentUser.displayName , Toast.LENGTH_SHORT).show();
                             }
 
                             Log.d("User Id", user.getUid());
@@ -247,8 +247,8 @@ public class LoginActivity extends AppCompatActivity {
 
         String s = etEmail.getText().toString();
         String[] split = s.replace(".","").split("@");
-        CURRENT_USER.displayName = split[0].toLowerCase();
-        CURRENT_USER.email = etEmail.getText().toString().toLowerCase();
+        CurrentUser.displayName = split[0].toLowerCase();
+        CurrentUser.email = etEmail.getText().toString().toLowerCase();
     }
 
     private void getGoogleUsername(String email) {
@@ -256,8 +256,8 @@ public class LoginActivity extends AppCompatActivity {
 
         String s = email;
         String[] split = s.replace(".","").split("@");
-        CURRENT_USER.displayName = split[0].toLowerCase();
-        CURRENT_USER.email = email.toLowerCase();
+        CurrentUser.displayName = split[0].toLowerCase();
+        CurrentUser.email = email.toLowerCase();
     }
 
     private boolean validateEmail() {

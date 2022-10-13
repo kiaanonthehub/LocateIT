@@ -1,4 +1,4 @@
-package com.locateitteam.locateit;
+package com.locateitteam.locateit.Activity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -24,10 +24,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.locateitteam.locateit.GoogleAPI.FetchData;
+import com.locateitteam.locateit.R;
 import com.locateitteam.locateit.databinding.ActivityMapsBinding;
 
 import java.io.IOException;
@@ -52,7 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
     // component fields
-    private Button btnAtm,btnRestaurants,btnPetrol,btnSettings;
+    private Button btnAtm, btnRestaurants, btnPetrol, btnSettings;
     private SearchView searchView;
 
     @Override
@@ -66,7 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnPetrol = findViewById(R.id.goTo3);
         btnSettings = findViewById(R.id.btnSettings);
         searchView = findViewById(R.id.svlocation);
-        mapFragment = (SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -75,22 +76,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 String location = searchView.getQuery().toString();
                 List<Address> addressLst = null;
 
-                if (location != null || location == ""){
+                if (location != null || location == "") {
 
                     //https://youtu.be/R6hev9p_qW8
                     Geocoder geocoder = new Geocoder(MapsActivity.this);
 
-                    try{
-                        addressLst = geocoder.getFromLocationName(location,1);
-                        if(addressLst.size() != 0){
+                    try {
+                        addressLst = geocoder.getFromLocationName(location, 1);
+                        if (addressLst.size() != 0) {
                             Address address = addressLst.get(0);
-                            LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
-                            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in "+ location));
+                            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in " + location));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                        }else{
+                        } else {
 
                         }
-                    }catch(IOException e){
+                    } catch (IOException e) {
 
                     }
                 }
@@ -102,7 +103,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return false;
             }
         });
-
 
 
         btnAtm.setOnClickListener(new View.OnClickListener() {
@@ -198,7 +198,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             } else {
                 ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
             }
-        }else {
+        } else {
             ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
@@ -251,20 +251,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         getDeviceLocation();
     }
 
-    public void FindPlaceType(String place){
+    public void FindPlaceType(String place) {
 
         mMap.clear();
         // deaclare var
-        double lat = deviceLatlong.latitude, lng=deviceLatlong.longitude;
+        double lat = deviceLatlong.latitude, lng = deviceLatlong.longitude;
 
         StringBuilder stringBuilder = new
                 StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
 
-        stringBuilder.append("location="+lat+","+lng);
+        stringBuilder.append("location=" + lat + "," + lng);
         stringBuilder.append("&radius=1000");
-        stringBuilder.append("&type="+place);
+        stringBuilder.append("&type=" + place);
         stringBuilder.append("&sensor=true");
-        stringBuilder.append("&key="+getResources().getString(R.string.google_api_key_places));
+        stringBuilder.append("&key=" + getResources().getString(R.string.google_api_key_places));
 
         String url = stringBuilder.toString();
         Object dataFetch[] = new Object[2];

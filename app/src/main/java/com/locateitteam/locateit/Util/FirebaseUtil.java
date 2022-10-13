@@ -15,7 +15,6 @@ import com.locateitteam.locateit.Model.SettingModel;
 
 import java.util.List;
 
-
 // generic class to read, write and update a node
 public class FirebaseUtil {
 
@@ -24,38 +23,6 @@ public class FirebaseUtil {
 
     // method to write to firebase
     public static void WriteToFirebase(SettingModel settings){
-
         mDatabase.setValue(settings);
     }
-
-    // method to read from firebase
-    public static SettingModel ReadFromFirebase(){
-
-        // clear list - reusablility
-
-        // isntantiate settings obj
-        SettingModel settingModel = new SettingModel();
-
-        // declare and initalise list
-        List<SettingModel> lstSettingsModel = null;
-
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                // iterate through the obj pulled from firebase
-                for(DataSnapshot mySnapshot: snapshot.getChildren()){
-
-                    // store the firebase obj to temp list and return
-                    lstSettingsModel.add(mySnapshot.getValue(SettingModel.class));
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
-        });
-
-        // list will alway contain one element which is index 0
-        return lstSettingsModel.get(0);
-    }
-
 }
