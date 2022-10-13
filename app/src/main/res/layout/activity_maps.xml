@@ -30,19 +30,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.124" />
 
-    <Button
-        android:id="@+id/goTo1"
-        android:layout_width="114dp"
-        android:layout_height="86dp"
-        android:background="@color/white"
-        android:text="ATMs"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/map"
-        app:layout_constraintVertical_bias="0.22" />
+
+    <HorizontalScrollView
+        android:id="@+id/placesList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/svlocation"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/goTo2"
+        app:layout_constraintTop_toBottomOf="@+id/svlocation"
+        app:layout_constraintVertical_bias="0.19999999">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/placesGroup"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true"
+            app:singleSelection="true" />
+
+    </HorizontalScrollView>
 
     <Button
         android:id="@+id/goTo2"
@@ -56,7 +63,21 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/map"
-        app:layout_constraintVertical_bias="0.22" />
+        app:layout_constraintVertical_bias="0.322" />
+
+    <Button
+        android:id="@+id/goTo1"
+        android:layout_width="114dp"
+        android:layout_height="86dp"
+        android:background="@color/white"
+        android:text="ATMs"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/map"
+        app:layout_constraintVertical_bias="0.322" />
 
     <Button
         android:id="@+id/goTo3"
@@ -67,10 +88,10 @@
         android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintHorizontal_bias="0.949"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/map"
-        app:layout_constraintVertical_bias="0.22" />
+        app:layout_constraintVertical_bias="0.322" />
 
     <Button
         android:id="@+id/btnSettings"

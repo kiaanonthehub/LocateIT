@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.locateitteam.locateit.GoogleAPI.FetchData;
 import com.locateitteam.locateit.R;
 import com.locateitteam.locateit.databinding.ActivityMapsBinding;
@@ -45,6 +46,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private LatLng deviceLatlong;
     private boolean mLocationPermissionGranted = false;
+    private boolean isLocationPermissionOk, isTrafficEnable;
 
     // map fields
     private GoogleMap mMap;
@@ -68,6 +70,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnSettings = findViewById(R.id.btnSettings);
         searchView = findViewById(R.id.svlocation);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+
+
+        binding.enableTraffic.setOnClickListener(view -> {
+
+            if (isTrafficEnable) {
+                if (mMap != null) {
+                    mMap.setTrafficEnabled(false);
+                    isTrafficEnable = false;
+                }
+            } else {
+                if (mMap != null) {
+                    mMap.setTrafficEnabled(true);
+                    isTrafficEnable = true;
+                }
+            }
+
+        });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
