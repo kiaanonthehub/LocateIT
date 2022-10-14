@@ -37,9 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/svlocation"
         android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@+id/goTo2"
-        app:layout_constraintTop_toBottomOf="@+id/svlocation"
-        app:layout_constraintVertical_bias="0.19999999">
+        app:layout_constraintTop_toBottomOf="@+id/svlocation">
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/placesGroup"
@@ -50,48 +48,6 @@
             app:singleSelection="true" />
 
     </HorizontalScrollView>
-
-    <Button
-        android:id="@+id/goTo2"
-        android:layout_width="114dp"
-        android:layout_height="86dp"
-        android:background="@color/white"
-        android:text="Restaurants"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/map"
-        app:layout_constraintVertical_bias="0.322" />
-
-    <Button
-        android:id="@+id/goTo1"
-        android:layout_width="114dp"
-        android:layout_height="86dp"
-        android:background="@color/white"
-        android:text="ATMs"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/map"
-        app:layout_constraintVertical_bias="0.322" />
-
-    <Button
-        android:id="@+id/goTo3"
-        android:layout_width="114dp"
-        android:layout_height="86dp"
-        android:background="@color/white"
-        android:text="Petrol"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.949"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/map"
-        app:layout_constraintVertical_bias="0.322" />
 
     <Button
         android:id="@+id/btnSettings"
@@ -111,15 +67,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="52dp"
         android:src="@drawable/ic_map_type"
         app:backgroundTint="@color/white"
         app:fabCustomSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.928"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/goTo3"
-        app:tint="@color/blue_grey" />
+        app:tint="@color/blue_grey"
+        tools:layout_editor_absoluteY="346dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/enableTraffic"

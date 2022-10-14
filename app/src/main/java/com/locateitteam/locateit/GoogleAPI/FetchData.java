@@ -1,11 +1,12 @@
 package com.locateitteam.locateit.GoogleAPI;
 
 import android.os.AsyncTask;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.locateitteam.locateit.Model.GooglePlaceModel.GooglePlaceModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,6 +19,7 @@ public class FetchData extends AsyncTask<Object, String, String> {
     String googleNearByPlaces;
     GoogleMap googleMap;
     String url;
+    GooglePlaceModel googlePlaceModel;
 
     @Override
     protected void onPostExecute(String s) {
@@ -49,12 +51,14 @@ public class FetchData extends AsyncTask<Object, String, String> {
         }
     }
 
+
     @Override
     protected String doInBackground(Object... objects) {
 
         try {
 
             googleMap = (GoogleMap) objects[0];
+
             url = (String) objects[1];
             DownloadUrl downloadUrl = new DownloadUrl();
             googleNearByPlaces = downloadUrl.retrieveUrl(url);

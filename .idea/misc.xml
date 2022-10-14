@@ -9,6 +9,7 @@
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_gas_station.xml" value="0.106" />
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_hospital.xml" value="0.106" />
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_hotel.xml" value="0.106" />
+        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_location.xml" value="0.1705" />
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_map_type.xml" value="0.1" />
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_my_location.xml" value="0.1" />
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_pharmacy.xml" value="0.106" />
@@ -17,7 +18,7 @@
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_shopping_cart.xml" value="0.106" />
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_traffic.xml" value="0.1" />
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/activity_maps.xml" value="0.1" />
+        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/activity_maps.xml" value="0.5" />
         <entry key="..\:/Users/tyres/AndroidStudioProjects/LocateIT/app/src/main/res/drawable/background_round.xml" value="0.1" />
         <entry key="..\:/Users/tyres/AndroidStudioProjects/LocateIT/app/src/main/res/layout/activity_main.xml" value="0.2359375" />
         <entry key="..\:/Users/tyres/AndroidStudioProjects/LocateIT/app/src/main/res/layout/activity_maps.xml" value="0.264" />
