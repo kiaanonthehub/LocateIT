@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.locateitteam.locateit.Constant.AllConstant;
 import com.locateitteam.locateit.GoogleAPI.FetchData;
@@ -57,6 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private SupportMapFragment mapFragment;
     private ActivityMapsBinding binding;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    private PlaceModel selectedPlaceModel;
 
     // component fields
     private Button btnAtm, btnRestaurants, btnPetrol, btnSettings;
@@ -92,6 +94,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         }
+
+        binding.placesGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(ChipGroup group, int checkedId) {
+
+                if (checkedId != -1) {
+                    PlaceModel placeModel = AllConstant.placesName.get(checkedId - 1);
+                    selectedPlaceModel = placeModel;
+                    FindPlaceType(placeModel.getPlaceType());
+                }
+            }
+        });
 
 
         binding.enableTraffic.setOnClickListener(view -> {
@@ -142,42 +156,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public boolean onQueryTextChange(String s) {
                 return false;
-            }
-        });
-
-
-        btnAtm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FindPlaceType("atm");
-
-//                FindPlaceType(btnAtm.getText().toString());
-//                Toast.makeText(MapsActivity.this, ""+btnAtm.getText().toString(), Toast.LENGTH_SHORT).show();
-//                // Add a marker and cordinates in to find atm and move the camera
-//                LatLng london = new LatLng(51.5072, 0.1276);
-//                mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
-//                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
-            }
-        });
-
-        btnRestaurants.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FindPlaceType("restaurant");
-
-            }
-        });
-
-        btnPetrol.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Add a marker and cordinates in to find atm and move the camera
-                //LatLng london = new LatLng(51.5072, 0.1276);
-                //mMap.addMarker(new MarkerOptions().position(london).title("Marker in London"));
-                //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(london, 15));
-
-                FindPlaceType("gas_station");
-                Toast.makeText(MapsActivity.this, "ghghghhghg", Toast.LENGTH_SHORT).show();
             }
         });
 
