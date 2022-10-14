@@ -61,7 +61,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private PlaceModel selectedPlaceModel;
 
     // component fields
-    private Button  btnSettings;
     private SearchView searchView;
 
     @Override
@@ -70,7 +69,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        btnSettings = findViewById(R.id.btnSettings);
         searchView = findViewById(R.id.svlocation);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
@@ -121,6 +119,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         });
 
+        binding.enableSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MapsActivity.this, SettingsActivity.class);
+                startActivity(i);
+            }
+        });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -153,14 +159,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public boolean onQueryTextChange(String s) {
                 return false;
-            }
-        });
-
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MapsActivity.this, SettingsActivity.class);
-                startActivity(i);
             }
         });
 
