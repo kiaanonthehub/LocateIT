@@ -119,7 +119,7 @@
         app:layout_constraintHorizontal_bias="0.928"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goTo3"
-        app:tint="@color/blue_700" />
+        app:tint="@color/blue_grey" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/enableTraffic"
@@ -135,7 +135,7 @@
         app:layout_constraintHorizontal_bias="0.931"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnMapType"
-        app:tint="@color/blue_700" />
+        app:tint="@color/blue_grey" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/currentLocation"
@@ -151,7 +151,7 @@
         app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enableTraffic"
-        app:tint="@color/blue_700" />
+        app:tint="@color/blue_grey" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

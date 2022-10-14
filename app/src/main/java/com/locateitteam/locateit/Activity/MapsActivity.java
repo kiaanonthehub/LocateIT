@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -27,8 +28,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.locateitteam.locateit.Constant.AllConstant;
 import com.locateitteam.locateit.GoogleAPI.FetchData;
+import com.locateitteam.locateit.Model.PlaceModel;
 import com.locateitteam.locateit.R;
 import com.locateitteam.locateit.databinding.ActivityMapsBinding;
 
@@ -70,6 +74,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnSettings = findViewById(R.id.btnSettings);
         searchView = findViewById(R.id.svlocation);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+
+        // horizontal scroll view for places
+        for (PlaceModel placeModel : AllConstant.placesName) {
+
+            Chip chip = new Chip(this);
+            chip.setText(placeModel.getName());
+            chip.setId(placeModel.getId());
+            chip.setPadding(8, 8, 8, 8);
+            chip.setTextColor(getResources().getColor(R.color.white, null));
+            chip.setChipBackgroundColor(getResources().getColorStateList(R.color.blue_grey, null));
+            chip.setChipIcon(ResourcesCompat.getDrawable(getResources(), placeModel.getDrawableId(), null));
+            chip.setCheckable(true);
+            chip.setCheckedIconVisible(false);
+
+            binding.placesGroup.addView(chip);
+
+
+        }
 
 
         binding.enableTraffic.setOnClickListener(view -> {
