@@ -1,6 +1,8 @@
-package com.locateitteam.locateit.Model.GooglePlaceModel;
+package com.locateitteam.locateit;
 
 import com.google.gson.annotations.SerializedName;
+import com.locateitteam.locateit.Model.GooglePlaceModel.GeometryModel;
+import com.locateitteam.locateit.Model.GooglePlaceModel.PhotoModel;
 
 import java.util.List;
 

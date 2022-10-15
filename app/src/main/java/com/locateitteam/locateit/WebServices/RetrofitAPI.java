@@ -1,7 +1,7 @@
 package com.locateitteam.locateit.WebServices;
 
 import com.locateitteam.locateit.Model.DirectionPlaceModel.DirectionResponseModel;
-import com.locateitteam.locateit.GooglePlaceModel.GoogleResponseModel;
+import com.locateitteam.locateit.Model.GooglePlaceModel.GoogleResponseModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

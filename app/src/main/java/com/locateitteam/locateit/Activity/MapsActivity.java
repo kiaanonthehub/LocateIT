@@ -1,25 +1,35 @@
 package com.locateitteam.locateit.Activity;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,6 +40,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.locateitteam.locateit.Constant.AllConstant;
 import com.locateitteam.locateit.GoogleAPI.FetchData;
@@ -49,7 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    public static LatLng deviceLatlong,destinationLatLong;
+    public static LatLng deviceLatlong, destinationLatLong;
     private boolean mLocationPermissionGranted = false;
     private boolean isLocationPermissionOk, isTrafficEnable;
 
@@ -66,6 +77,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        //Location services check
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+
+            //here do what you want when the GPS service is enabled
+
+            Toast.makeText(MapsActivity.this, "GPS is enabled", Toast.LENGTH_SHORT).show();
+
+        }
+        else {
+
+            MaterialAlertDialogBuilder locationDialog = new MaterialAlertDialogBuilder(MapsActivity.this);
+            locationDialog.setTitle("Attention");
+            locationDialog.setMessage("Location settings must be enabled from the settings to use the application");
+            locationDialog.setCancelable(false);
+            locationDialog.setPositiveButton("Open settings", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+            });
+            locationDialog.create().show();
+        }
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -126,6 +164,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //startActivity(i);
                 Toast.makeText(MapsActivity.this, "Coming soon bi-otch", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        binding.btnMapType.setOnClickListener(view -> {
+            PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
+            popupMenu.getMenuInflater().inflate(R.menu.map_type_menu, popupMenu.getMenu());
+
+
+            popupMenu.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case R.id.btnNormal:
+                        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                        break;
+
+                    case R.id.btnSatellite:
+                        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                        break;
+
+                    case R.id.btnTerrain:
+                        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                        break;
+                }
+                return true;
+            });
+
+            popupMenu.show();
         });
 
         binding.btnDirection.setOnClickListener(new View.OnClickListener() {
@@ -314,3 +377,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fetchData.execute(dataFetch);
     }
 }
+

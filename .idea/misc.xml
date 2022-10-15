@@ -3,26 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_atm.xml" value="0.106" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2775" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_car_wash.xml" value="0.106" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_gas_station.xml" value="0.106" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_hospital.xml" value="0.106" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_hotel.xml" value="0.106" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_location.xml" value="0.1705" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_map_type.xml" value="0.1" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_my_location.xml" value="0.1" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_pharmacy.xml" value="0.106" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_restaurant.xml" value="0.106" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_saloon.xml" value="0.106" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_shopping_cart.xml" value="0.106" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_traffic.xml" value="0.1" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/activity_direction.xml" value="0.1" />
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/activity_maps.xml" value="0.4551772063933287" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/activity_test.xml" value="0.3345250255362615" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.1" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/step_item_layout.xml" value="0.1546875" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/drawable/bg_white_rounded.xml" value="0.152" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/drawable/ic_bookmark.xml" value="0.1775" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/drawable/ic_direction.xml" value="0.1775" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/drawable/ic_rating.xml" value="0.1775" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/drawable/map_background.xml" value="0.152" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/layout/activity_direction.xml" value="0.144017094017094" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/layout/activity_login.xml" value="0.144017094017094" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/layout/activity_logout.xml" value="0.144017094017094" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/layout/activity_maps.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/layout/activity_reset_password.xml" value="0.13994565217391305" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/layout/activity_settings.xml" value="0.22" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/layout/activity_signup.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.144017094017094" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/layout/info_window_layout.xml" value="0.144017094017094" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/layout/place_item_layout.xml" value="0.144017094017094" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/layout/step_item_layout.xml" value="0.144017094017094" />
+        <entry key="..\:/Users/abude/StudioProjects/LocateIT/app/src/main/res/menu/nav_menu.xml" value="0.22" />
         <entry key="..\:/Users/tyres/AndroidStudioProjects/LocateIT/app/src/main/res/drawable/background_round.xml" value="0.1" />
         <entry key="..\:/Users/tyres/AndroidStudioProjects/LocateIT/app/src/main/res/layout/activity_main.xml" value="0.2359375" />
         <entry key="..\:/Users/tyres/AndroidStudioProjects/LocateIT/app/src/main/res/layout/activity_maps.xml" value="0.264" />

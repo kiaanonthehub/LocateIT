@@ -16,7 +16,6 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -26,7 +25,6 @@ import com.locateitteam.locateit.Model.DirectionPlaceModel.DirectionLegModel;
 import com.locateitteam.locateit.Model.DirectionPlaceModel.DirectionResponseModel;
 import com.locateitteam.locateit.Model.DirectionPlaceModel.DirectionRouteModel;
 import com.locateitteam.locateit.Model.DirectionPlaceModel.DirectionStepModel;
-import com.locateitteam.locateit.GooglePlaceModel.GoogleResponseModel;
 import com.locateitteam.locateit.Permissions.AppPermissions;
 import com.locateitteam.locateit.R;
 import com.locateitteam.locateit.WebServices.RetrofitAPI;

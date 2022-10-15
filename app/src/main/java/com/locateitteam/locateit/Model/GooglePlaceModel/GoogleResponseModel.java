@@ -1,6 +1,6 @@
-package com.locateitteam.locateit.GooglePlaceModel;
+package com.locateitteam.locateit.Model.GooglePlaceModel;
 
-import com.locateitteam.locateit.Model.GooglePlaceModel.GooglePlaceModel;
+import com.locateitteam.locateit.GooglePlaceModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

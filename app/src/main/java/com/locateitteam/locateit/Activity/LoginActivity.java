@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         //Google Sign-In
-        //createRequest();
+        createRequest();
 
         findViewById(R.id.google_signIn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +149,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                     // initialise current user properties
                                     getUsername();
+                                    Toast.makeText(LoginActivity.this, CurrentUser.displayName , Toast.LENGTH_SHORT).show();
                                 }
 
                             } else {
@@ -162,18 +163,18 @@ public class LoginActivity extends AppCompatActivity {
                     });
         }
 
-//    private void createRequest() {
-//
-//        // Configure Google Sign In
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(R.string.default_web_client_id))
-//                .requestEmail()
-//                .build();
-//
-//        // Build a GoogleSignInClient with the options specified by gso.
-//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-//
-//    }
+    private void createRequest() {
+
+        // Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+    }
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();

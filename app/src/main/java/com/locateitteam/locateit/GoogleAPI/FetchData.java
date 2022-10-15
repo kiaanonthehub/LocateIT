@@ -6,7 +6,7 @@ import com.google.android.gms.maps.GoogleMap;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.locateitteam.locateit.Model.GooglePlaceModel.GooglePlaceModel;
+import com.locateitteam.locateit.GooglePlaceModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
