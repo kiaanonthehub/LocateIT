@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="savedPlaceModel"
+            type="com.locateitteam.locateit.SavedPlaceModel" />
+
+        <variable
+            name="listener"
+            type="com.locateitteam.locateit.SavedLocationInterface" />
+    </data>
+
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +37,7 @@
                     android:layout_weight="1.8"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="Place Name"
+                    android:text="@{savedPlaceModel.name,default=`Place Name`}"
                     android:textColor="@color/blue_500"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -35,6 +46,7 @@
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="0.2"
+                    android:onClick="@{()->listener.onLocationClick(savedPlaceModel)}"
                     android:src="@drawable/ic_baseline_directions_24"
                     app:tint="@color/blue_500" />
 
@@ -48,7 +60,7 @@
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="Address"
+                android:text="@{savedPlaceModel.address,default=Address}"
                 android:textColor="@color/blue_500"
                 android:textSize="15dp" />
 
