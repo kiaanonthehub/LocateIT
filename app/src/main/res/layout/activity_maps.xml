@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
     android:orientation="vertical">
+
 
     <fragment
         android:id="@+id/map"
@@ -12,9 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".Activity.MapsActivity"
-        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteX="17dp"
         tools:layout_editor_absoluteY="0dp" />
-
 
     <SearchView
         android:id="@+id/svlocation"
@@ -27,10 +27,10 @@
         android:queryHint="Search location here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.123" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <HorizontalScrollView
         android:id="@+id/placesList"
@@ -57,14 +57,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="164dp"
         android:src="@drawable/ic_map_type"
         app:backgroundTint="@color/white"
         app:fabCustomSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placesList"
+        app:layout_constraintTop_toTopOf="@+id/map"
+        app:tint="@color/blue_grey" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnFavLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="212dp"
+        android:src="@drawable/ic_baseline_star_outline_24"
+        app:backgroundTint="@color/white"
+        app:fabCustomSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/map"
+        app:tint="@color/blue_grey" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnDirection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_baseline_directions_24"
+        app:backgroundTint="@color/white"
+        app:fabCustomSize="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/map"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="@+id/map"
+        app:layout_constraintTop_toTopOf="@+id/map"
+        app:layout_constraintVertical_bias="0.913"
         app:tint="@color/blue_grey" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -73,14 +104,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/btnMapType"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="116dp"
         android:src="@drawable/ic_traffic"
         app:backgroundTint="@color/white"
         app:fabCustomSize="40dp"
         app:layout_constraintEnd_toEndOf="@+id/map"
-        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMapType"
+        app:layout_constraintTop_toTopOf="@+id/map"
         app:tint="@color/blue_grey" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -89,13 +120,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/btnMapType"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
         android:src="@drawable/ic_baseline_settings_24"
         app:backgroundTint="@color/white"
         app:fabCustomSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enableTraffic"
+        app:layout_constraintTop_toTopOf="@+id/map"
         app:tint="@color/blue_grey" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -112,8 +144,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placesList"
-        app:layout_constraintVertical_bias="0.971"
+        app:layout_constraintTop_toTopOf="@+id/map"
+        app:layout_constraintVertical_bias="0.843"
         app:tint="@color/blue_grey" />
 
 

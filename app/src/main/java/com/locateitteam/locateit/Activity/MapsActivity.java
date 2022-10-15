@@ -119,12 +119,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         });
 
+        binding.btnFavLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent i = new Intent(MapsActivity.this, DirectionActivity.class);
+                //startActivity(i);
+                Toast.makeText(MapsActivity.this, "Coming soon bi-otch", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.btnDirection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MapsActivity.this, DirectionActivity.class);
+                startActivity(i);
+            }
+        });
+
         binding.enableSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent i = new Intent(MapsActivity.this, SettingsActivity.class);
-                Intent i = new Intent(MapsActivity.this, DirectionActivity.class);
+                Intent i = new Intent(MapsActivity.this, SettingsActivity.class);
                 startActivity(i);
+            }
+        });
+
+        binding.currentLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(deviceLatlong, 15));
             }
         });
 

@@ -17,15 +17,16 @@
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_saloon.xml" value="0.106" />
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_shopping_cart.xml" value="0.106" />
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/drawable/ic_traffic.xml" value="0.1" />
+        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/activity_direction.xml" value="0.1" />
         <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/activity_maps.xml" value="0.325" />
+        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/activity_maps.xml" value="0.4551772063933287" />
+        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/activity_test.xml" value="0.3345250255362615" />
+        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.1" />
+        <entry key="..\:/Users/Kiaan Maharaj/Desktop/LocateIT/app/src/main/res/layout/step_item_layout.xml" value="0.1546875" />
         <entry key="..\:/Users/tyres/AndroidStudioProjects/LocateIT/app/src/main/res/drawable/background_round.xml" value="0.1" />
-        <entry key="..\:/Users/tyres/AndroidStudioProjects/LocateIT/app/src/main/res/layout/activity_direction.xml" value="0.264" />
         <entry key="..\:/Users/tyres/AndroidStudioProjects/LocateIT/app/src/main/res/layout/activity_main.xml" value="0.2359375" />
         <entry key="..\:/Users/tyres/AndroidStudioProjects/LocateIT/app/src/main/res/layout/activity_maps.xml" value="0.264" />
         <entry key="..\:/Users/tyres/AndroidStudioProjects/LocateIT/app/src/main/res/layout/activity_settings.xml" value="0.2046875" />
-        <entry key="..\:/Users/tyres/AndroidStudioProjects/LocateIT/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.264" />
-        <entry key="..\:/Users/tyres/AndroidStudioProjects/LocateIT/app/src/main/res/layout/step_item_layout.xml" value="0.1" />
       </map>
     </option>
   </component>
