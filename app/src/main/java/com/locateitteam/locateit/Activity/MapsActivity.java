@@ -124,7 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View view) {
                 Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
                 startActivity(i);
-                Toast.makeText(MapsActivity.this, "Coming soon bi-otch", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MapsActivity.this, "Coming soon bi-otch", Toast.LENGTH_SHORT).show();
             }
         });
 
