@@ -2,7 +2,7 @@ package com.locateitteam.locateit.Util;
 
 public class CurrentUser {
 
-    public static String userId = "TyTyKiAbu";
+    public static String userId =" ";
 
     public static String email;
     public static String displayName;

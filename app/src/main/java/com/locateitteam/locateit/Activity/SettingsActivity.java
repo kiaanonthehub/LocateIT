@@ -59,11 +59,13 @@ public class SettingsActivity extends AppCompatActivity {
                 }
 
                 // comment this link https://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
-                int spinnerPosition = adapter.getPosition(list.get(0));
-                spinnerMetric.setSelection(spinnerPosition);
+                if(list.size()>0){
+                    int spinnerPosition = adapter.getPosition(list.get(0));
+                    spinnerMetric.setSelection(spinnerPosition);
 
-                spinnerPosition = landmarkAdapter.getPosition(list.get(1));
-                spinnerPreferredLandmark.setSelection(spinnerPosition);
+                    spinnerPosition = landmarkAdapter.getPosition(list.get(1));
+                    spinnerPreferredLandmark.setSelection(spinnerPosition);
+                }
 
             }
             @Override
