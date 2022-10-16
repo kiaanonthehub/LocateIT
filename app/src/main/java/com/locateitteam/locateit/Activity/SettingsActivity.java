@@ -102,9 +102,9 @@ public class SettingsActivity extends AppCompatActivity {
                 CurrentUser.metricSelection = spinnerMetric.getSelectedItem().toString();
                 CurrentUser.MapType = spinnerPreferredMapType.getSelectedItem().toString();
                 CurrentUser.TravelType = spinnerPreferredTransit.getSelectedItem().toString();
-                //CurrentUser.activateSettings = swActivate.isChecked();
+                CurrentUser.activateSettings = swActivate.isChecked();
                 // write to firebase
-                FirebaseUtil.WriteToFirebase(new SettingModel(CurrentUser.metricSelection, CurrentUser.MapType,CurrentUser.TravelType));
+                FirebaseUtil.WriteToFirebase(new SettingModel(CurrentUser.metricSelection, CurrentUser.MapType,CurrentUser.TravelType,CurrentUser.activateSettings));
 
                 Intent i = new Intent(SettingsActivity.this, MapsActivity.class);
                 startActivity(i);
