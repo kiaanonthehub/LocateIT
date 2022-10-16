@@ -35,6 +35,8 @@ import com.locateitteam.locateit.Constant.AllConstant;
 import com.locateitteam.locateit.GoogleAPI.FetchData;
 import com.locateitteam.locateit.Model.PlaceModel;
 import com.locateitteam.locateit.R;
+import com.locateitteam.locateit.SavedPlaceModel;
+import com.locateitteam.locateit.Util.FirebaseUtil;
 import com.locateitteam.locateit.databinding.ActivityMapsBinding;
 
 import java.io.IOException;
@@ -59,6 +61,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private PlaceModel selectedPlaceModel;
+
+    // test instance of class for - SavedLocation
+    SavedPlaceModel savedPlaceModel = new SavedPlaceModel();
 
     // component fields
     private SearchView searchView;
@@ -122,9 +127,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.btnFavLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // write to firebase
+                FirebaseUtil.WriteToFirebase(savedPlaceModel);
+
                 Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
                 startActivity(i);
                 //Toast.makeText(MapsActivity.this, "Coming soon bi-otch", Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
@@ -171,6 +182,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in " + location));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             destinationLatLong = latLng;
+
+                            // demo
+                            savedPlaceModel.setName(address.getFeatureName()+", "+address.getThoroughfare());
+                            savedPlaceModel.setAddress(address.getAddressLine(0));
+                            savedPlaceModel.setLat(latLng.latitude);
+                            savedPlaceModel.setLng(latLng.longitude);
+
                         } else {
 
                         }

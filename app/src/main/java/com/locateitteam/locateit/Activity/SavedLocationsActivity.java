@@ -30,6 +30,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.locateitteam.locateit.Adapter.SavedLocationsAdapter;
 import com.locateitteam.locateit.Model.SettingModel;
+import com.locateitteam.locateit.Model.ViewModel.SavedPlacesViewModel;
 import com.locateitteam.locateit.R;
 import com.locateitteam.locateit.SavedLocationInterface;
 import com.locateitteam.locateit.SavedPlaceModel;
@@ -55,15 +56,40 @@ public class SavedLocationsActivity extends AppCompatActivity {
         List<SavedPlaceModel> itemModelList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.savedRecyclerView);
 
-        itemModelList.add(new SavedPlaceModel("Gateway", "1 Palm Blvd, Umhlanga Ridge, Umhlanga, 4021", " placeId", 4.86, 5, 37.41, -122.07));
-        savedLocationsAdapter = new SavedLocationsAdapter(SavedLocationsActivity.this,itemModelList);
+        // read from firebase
+        FirebaseUtil.read_saved_locations.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                // array list
+                ArrayList<SavedPlacesViewModel> lstSavedPlaceModelsVm = new ArrayList<>();
 
-        recyclerView.setAdapter(savedLocationsAdapter);
-        savedLocationsAdapter.notifyDataSetChanged();
+                // iterate through the obj pulled from firebase
+                for (DataSnapshot mySnapshot : snapshot.getChildren()) {
+                    lstSavedPlaceModelsVm.clear();
+                    lstSavedPlaceModelsVm.add(mySnapshot.getValue(SavedPlacesViewModel.class));
+
+                    for (SavedPlacesViewModel i : lstSavedPlaceModelsVm) {
+
+                        itemModelList.add(new SavedPlaceModel(i.getName(), i.getAddress(), " placeId", i.getRating(), 0, i.getLat(), i.getLng()));
+                        savedLocationsAdapter = new SavedLocationsAdapter(SavedLocationsActivity.this, itemModelList);
+
+                        layoutManager = new LinearLayoutManager(SavedLocationsActivity.this);
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                        recyclerView.setAdapter(savedLocationsAdapter);
+                        savedLocationsAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
     }
 
