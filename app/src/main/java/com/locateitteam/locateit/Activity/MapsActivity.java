@@ -30,6 +30,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -60,22 +61,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     // test instance of class for - SavedLocation
     SavedPlaceModel savedPlaceModel = new SavedPlaceModel();
+    boolean test = false; // ---
     private boolean mLocationPermissionGranted = false;
     private boolean isLocationPermissionOk, isTrafficEnable;
-
     // map fields
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
     private ActivityMapsBinding binding;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private PlaceModel selectedPlaceModel;
-
     // component fields
     private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (test) {
+
+        }
+
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
@@ -124,8 +129,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             chip.setCheckedIconVisible(false);
 
             binding.placesGroup.addView(chip);
-
-
         }
 
         binding.placesGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
@@ -136,6 +139,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     PlaceModel placeModel = AllConstant.placesName.get(checkedId - 1);
                     selectedPlaceModel = placeModel;
                     FindPlaceType(placeModel.getPlaceType());
+
+                    test = true;
                 }
             }
         });
@@ -162,16 +167,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
 
-                if(savedPlaceModel.getAddress() == null) {
+                if (savedPlaceModel.getAddress() == null) {
 
                     Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
                     startActivity(i);
 
 
-                }else{
+                } else {
                     // write to firebase
                     FirebaseUtil.WriteToFirebase(savedPlaceModel);
-                    Toast.makeText(MapsActivity.this, savedPlaceModel.getName()+" has been saved to favourite locations ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this, savedPlaceModel.getName() + " has been saved to favourite locations ", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
                     startActivity(i);
                 }
@@ -264,6 +269,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             savedPlaceModel.setAddress(address.getAddressLine(0));
                             savedPlaceModel.setLat(latLng.latitude);
                             savedPlaceModel.setLng(latLng.longitude);
+
+
+                            // test
+
+                            test = true;
+
 
                         } else {
 
@@ -406,5 +417,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         FetchData fetchData = new FetchData();
         fetchData.execute(dataFetch);
+    }
+
+    private void displayMarkerInfo(){
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                MarkerOptions markerOptions = new MarkerOptions();
+
+
+                // Setting the position for the marker
+                Toast.makeText(MapsActivity.this, "" + marker.getPosition(), Toast.LENGTH_SHORT).show(); // get Latlong
+
+                // Now you use above logic
+                return true;
+            }
+        });
     }
 }
