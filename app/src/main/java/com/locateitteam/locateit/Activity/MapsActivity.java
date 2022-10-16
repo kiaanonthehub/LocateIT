@@ -61,7 +61,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     // test instance of class for - SavedLocation
     SavedPlaceModel savedPlaceModel = new SavedPlaceModel();
-    boolean test = false; // ---
     private boolean mLocationPermissionGranted = false;
     private boolean isLocationPermissionOk, isTrafficEnable;
     // map fields
@@ -76,11 +75,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (test) {
-
-        }
-
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
@@ -140,7 +134,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     selectedPlaceModel = placeModel;
                     FindPlaceType(placeModel.getPlaceType());
 
-                    test = true;
+                        displayMarkerInfo();
                 }
             }
         });
@@ -269,12 +263,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             savedPlaceModel.setAddress(address.getAddressLine(0));
                             savedPlaceModel.setLat(latLng.latitude);
                             savedPlaceModel.setLng(latLng.longitude);
-
-
-                            // test
-
-                            test = true;
-
+                                displayMarkerInfo();
 
                         } else {
 
@@ -420,18 +409,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void displayMarkerInfo(){
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
-                MarkerOptions markerOptions = new MarkerOptions();
+        mMap.setOnMarkerClickListener(marker -> {
+            MarkerOptions markerOptions = new MarkerOptions();
 
+            destinationLatLong = null;
 
-                // Setting the position for the marker
-                Toast.makeText(MapsActivity.this, "" + marker.getPosition(), Toast.LENGTH_SHORT).show(); // get Latlong
+            // Setting the position for the marker
+            //Toast.makeText(MapsActivity.this, "Select the direction button to navigate to :"+marker.getTitle() , Toast.LENGTH_SHORT).show(); // get Latlong
 
-                // Now you use above logic
-                return true;
-            }
+            marker.showInfoWindow();
+
+            destinationLatLong = marker.getPosition();
+
+            return true;
         });
     }
 }
