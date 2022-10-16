@@ -51,20 +51,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    public static LatLng deviceLatlong,destinationLatLong;
+    public static LatLng deviceLatlong, destinationLatLong;
+    // test instance of class for - SavedLocation
+    SavedPlaceModel savedPlaceModel = new SavedPlaceModel();
     private boolean mLocationPermissionGranted = false;
     private boolean isLocationPermissionOk, isTrafficEnable;
-
     // map fields
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
     private ActivityMapsBinding binding;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private PlaceModel selectedPlaceModel;
-
-    // test instance of class for - SavedLocation
-    SavedPlaceModel savedPlaceModel = new SavedPlaceModel();
-
     // component fields
     private SearchView searchView;
 
@@ -184,7 +181,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             destinationLatLong = latLng;
 
                             // demo
-                            savedPlaceModel.setName(address.getFeatureName()+", "+address.getThoroughfare());
+                            if (address.getThoroughfare() != null) {
+                                savedPlaceModel.setName(address.getFeatureName() + ", " + address.getThoroughfare());
+
+                            } else {
+                                savedPlaceModel.setName(address.getFeatureName());
+                            }
                             savedPlaceModel.setAddress(address.getAddressLine(0));
                             savedPlaceModel.setLat(latLng.latitude);
                             savedPlaceModel.setLng(latLng.longitude);
