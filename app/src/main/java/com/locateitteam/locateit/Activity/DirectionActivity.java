@@ -62,6 +62,7 @@ import retrofit2.Response;
 
 public class DirectionActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    // declarations
     private ActivityDirectionBinding binding;
     private GoogleMap mGoogleMap;
     private AppPermissions appPermissions;
@@ -81,31 +82,38 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
         binding = ActivityDirectionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // initialise the fields
         endLat = getIntent().getDoubleExtra("lat", 0.0);
         endLng = getIntent().getDoubleExtra("lng", 0.0);
         placeId = getIntent().getStringExtra("placeId");
 
+        // property initialization
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         appPermissions = new AppPermissions();
 
+        // initialise json retrofit object
         retrofitAPI = RetrofitClient.getRetrofitClient().create(RetrofitAPI.class);
 
+        // initialise ui properties for directions
         bottomSheetLayoutBinding = binding.bottomSheet;
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayoutBinding.getRoot());
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
+        // initialise the ui adapter
         adapter = new DirectionStepAdapter();
 
+        // set the layout for the directions
         bottomSheetLayoutBinding.stepRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         bottomSheetLayoutBinding.stepRecyclerView.setAdapter(adapter);
 
+        // decalaring a support map fragment object
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.directionMap);
 
+        // initialise obj
         mapFragment.getMapAsync(this);
 
-
+        // initialise viewing the current updated traffic
         binding.enableTraffic.setOnClickListener(view -> {
             if (isTrafficEnable) {
                 if (mGoogleMap != null) {
@@ -120,6 +128,7 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
             }
         });
 
+        // user can select the mode of traffic
         binding.travelMode.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(ChipGroup group, int checkedId) {
@@ -144,8 +153,10 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
 
     }
 
+    // method used for the user to get the directions to a specific location
     private void getDirection(String mode) {
 
+        // check if the permissions has been enabled
         if (isLocationPermissionOk) {
             String url = "https://maps.googleapis.com/maps/api/directions/json?" +
                     "origin=" + deviceLatlong.latitude + "," + deviceLatlong.longitude +
@@ -153,6 +164,7 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
                     "&mode=" + mode +
                     "&key=" + getResources().getString(R.string.google_api_key_places);
 
+            // retrofit obj reading from the google api
             retrofitAPI.getDirection(url).enqueue(new Callback<DirectionResponseModel>() {
                 @Override
                 public void onResponse(Call<DirectionResponseModel> call, Response<DirectionResponseModel> response) {
@@ -219,8 +231,7 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
 
                                 options.addAll(stepList);
 
-                                Polyline polyline = mGoogleMap.addPolyline(options);
-
+                                //Polyline polyline = mGoogleMap.addPolyline(options);
                                 LatLng startLocation = new LatLng(legModel.getStartLocation().getLat(), legModel.getStartLocation().getLng());
                                 LatLng endLocation = new LatLng(legModel.getStartLocation().getLat(), legModel.getStartLocation().getLng());
 
@@ -248,8 +259,8 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
 
     }
 
+    // clean and initialise the ui
     private void clearUI() {
-
         mGoogleMap.clear();
         binding.txtStartLocation.setText("");
         binding.txtEndLocation.setText("");
@@ -272,12 +283,7 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
                 new AlertDialog.Builder(this)
                         .setTitle("Location Permission")
                         .setMessage("Near Me required location permission to show you near by places")
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                appPermissions.requestLocationPermission(DirectionActivity.this);
-                            }
-                        })
+                        .setPositiveButton("Ok", (dialog, which) -> appPermissions.requestLocationPermission(DirectionActivity.this))
                         .create().show();
             } else {
                 appPermissions.requestLocationPermission(DirectionActivity.this);
@@ -285,6 +291,7 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
         }
     }
 
+    // user permissions
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -299,6 +306,7 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
         }
     }
 
+    // initialise the google map
     private void setupGoogleMap() {
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -313,6 +321,7 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
         getCurrentLocation();
     }
 
+    // method to get the users current location
     private void getCurrentLocation() {
 
         FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -320,17 +329,14 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
 
             return;
         }
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    currentLocation = location;
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
+            if (location != null) {
+                currentLocation = location;
 
-                    getDirection("driving");
+                getDirection("driving");
 
-                } else {
-                    Toast.makeText(DirectionActivity.this, "Location Not Found", Toast.LENGTH_SHORT).show();
-                }
+            } else {
+                Toast.makeText(DirectionActivity.this, "Location Not Found", Toast.LENGTH_SHORT).show();
             }
         });
     }

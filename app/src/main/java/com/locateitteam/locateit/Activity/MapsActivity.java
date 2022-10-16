@@ -8,12 +8,10 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
-import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -26,10 +24,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -41,7 +36,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.locateitteam.locateit.Constant.AllConstant;
 import com.locateitteam.locateit.GoogleAPI.FetchData;
 import com.locateitteam.locateit.Model.PlaceModel;
@@ -63,16 +57,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     public static LatLng deviceLatlong, destinationLatLong;
+
     // test instance of class for - SavedLocation
     SavedPlaceModel savedPlaceModel = new SavedPlaceModel();
     private boolean mLocationPermissionGranted = false;
     private boolean isLocationPermissionOk, isTrafficEnable;
+
     // map fields
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
     private ActivityMapsBinding binding;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private PlaceModel selectedPlaceModel;
+
     // component fields
     private SearchView searchView;
 
@@ -81,6 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         //Location services check
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -90,9 +88,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             Toast.makeText(MapsActivity.this, "GPS is enabled", Toast.LENGTH_SHORT).show();
 
-        }
-        else {
+        } else {
 
+            // dialog prompt box
             MaterialAlertDialogBuilder locationDialog = new MaterialAlertDialogBuilder(MapsActivity.this);
             locationDialog.setTitle("Attention");
             locationDialog.setMessage("Location settings must be enabled from the settings to use the application");
@@ -142,7 +140,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-
+        // traffic fab
         binding.enableTraffic.setOnClickListener(view -> {
 
             if (isTrafficEnable) {
@@ -159,6 +157,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         });
 
+        // location fab
         binding.btnFavLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,6 +173,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        // map type fab
         binding.btnMapType.setOnClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
             popupMenu.getMenuInflater().inflate(R.menu.map_type_menu, popupMenu.getMenu());
@@ -199,6 +199,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             popupMenu.show();
         });
 
+        // get direction fab
         binding.btnDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,6 +208,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        // settings fab
         binding.enableSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -215,6 +217,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        // location fab
         binding.currentLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -222,6 +225,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        // search view editor
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {

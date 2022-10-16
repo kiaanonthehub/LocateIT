@@ -14,8 +14,8 @@ import com.locateitteam.locateit.R;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
+    // declare components
     private EditText inputEmail;
-
     private FirebaseAuth auth;
 
     @Override
@@ -23,44 +23,38 @@ public class ResetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
+        // initialise user components
         inputEmail = findViewById(R.id.email);
-
         Button btnReset = findViewById(R.id.btn_reset_password);
-
         Button btnBack = findViewById(R.id.btn_back);
 
+        // firebase auth initialization
         auth = FirebaseAuth.getInstance();
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
+        // back button click
+        btnBack.setOnClickListener(v -> finish());
+
+        // reset button click
+        btnReset.setOnClickListener(v -> {
+
+            String email = inputEmail.getText().toString().trim();
+
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(getApplication(), "Enter your registered email", Toast.LENGTH_SHORT).show();
+                return;
             }
-        });
 
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            FirebaseAuth.getInstance().sendPasswordResetEmail(email)
 
-                String email = inputEmail.getText().toString().trim();
-
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplication(), "Enter your registered email", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                FirebaseAuth.getInstance().sendPasswordResetEmail(email)
-
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(ResetPasswordActivity.this, "Password reset email sent" +
-                                        "Please check your spam folder for the email", Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(ResetPasswordActivity.this, "Failed to send reset email", Toast.LENGTH_LONG).show();
-                            }
-                            inputEmail.getText().clear();
-                        });
-            }
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(ResetPasswordActivity.this, "Password reset email sent" +
+                                    "Please check your spam folder for the email", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(ResetPasswordActivity.this, "Failed to send reset email", Toast.LENGTH_LONG).show();
+                        }
+                        inputEmail.getText().clear();
+                    });
         });
     }
 }

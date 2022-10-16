@@ -36,18 +36,15 @@ import com.locateitteam.locateit.Util.Global;
 
 public class LoginActivity extends AppCompatActivity {
 
+    // declare java variables
     private static final String TAG = "EmailPassword";
     private static final int ERROR_DIALOG_REQUEST = 9001;
-
-    // declare java variables
     private EditText etEmail, etPassword;
     private Button btnLogin;
     private TextView tvSignup, tvForgottenPassword;
     private TextInputLayout inputLayoutemail, inputLayoutpassword;
-
     private GoogleSignInClient mGoogleSignInClient;
     private final static int RC_SIGN_IN = 123;
-
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
@@ -78,10 +75,12 @@ public class LoginActivity extends AppCompatActivity {
         //Google Sign-In
         createRequest();
 
+        // google sign in button click
         findViewById(R.id.google_signIn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                // navigate the user to the sign in screen
                 signIn();
             }
         });
@@ -103,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // user forgot password
         tvForgottenPassword.setOnClickListener(view -> {
 
             // instantiate new intent object
@@ -165,6 +165,7 @@ public class LoginActivity extends AppCompatActivity {
                     });
         }
 
+    // google sign in
     private void createRequest() {
 
         // Configure Google Sign In
@@ -203,6 +204,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    // firebase login with google sign in
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -245,6 +247,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(getIntent());
     }
 
+    // method used to extract the username from a users email
     private String getUsername() {
         // get substring of @ and use as username for user
 
@@ -255,6 +258,7 @@ public class LoginActivity extends AppCompatActivity {
         return  split[0].toLowerCase();
     }
 
+    // method used to the username from a user if they sign in with google sign in
     private void getGoogleUsername(String email) {
         // get substring of @ and use as username for user
 
@@ -264,6 +268,7 @@ public class LoginActivity extends AppCompatActivity {
         CurrentUser.email = email.toLowerCase();
     }
 
+    // validate if the user has entered a valid email address
     private boolean validateEmail() {
 
         String emailInput = inputLayoutemail.getEditText().getText().toString().trim();
@@ -277,6 +282,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    // validate if the user has entered a valid password
     private boolean validatePassword() {
 
         String passwordInput = inputLayoutpassword.getEditText().getText().toString().trim();

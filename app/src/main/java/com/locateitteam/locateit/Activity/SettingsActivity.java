@@ -49,22 +49,27 @@ public class SettingsActivity extends AppCompatActivity {
         swActivate = findViewById(R.id.switchActivtate);
         btnLogout = findViewById(R.id.btnLogout);
 
+        // initilise adapter to read current settings from user in firebase
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SettingsActivity.this, R.array.MetricSelections, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerMetric.setAdapter(adapter);
 
+        // initilise adapter to read current settings from user in firebase
         ArrayAdapter<CharSequence> MapTypeAdapter = ArrayAdapter.createFromResource(SettingsActivity.this, R.array.MapType, android.R.layout.simple_spinner_item);
         MapTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerPreferredMapType.setAdapter(MapTypeAdapter);
 
+        // initilise adapter to read current settings from user in firebase
         ArrayAdapter<CharSequence> TravelTypeAdapter = ArrayAdapter.createFromResource(SettingsActivity.this, R.array.ModeOfTravel, android.R.layout.simple_spinner_item);
         TravelTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerPreferredTransit.setAdapter(TravelTypeAdapter);
 
+        // read from firebase
         FirebaseUtil.mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                // declare list
                 List<String> list = new ArrayList<>();
 
                 // iterate through the obj pulled from firebase
@@ -73,7 +78,8 @@ public class SettingsActivity extends AppCompatActivity {
                     list.add(mySnapshot.getValue().toString());
                 }
 
-                // comment this link https://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
+                // code attribution
+                // https://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
                 if(list.size()>0){
                     int spinnerPosition = adapter.getPosition(list.get(1));
                     spinnerMetric.setSelection(spinnerPosition);
@@ -86,7 +92,6 @@ public class SettingsActivity extends AppCompatActivity {
 
                     swActivate.setChecked(Boolean.parseBoolean(list.get(0)));
                 }
-
             }
 
             @Override

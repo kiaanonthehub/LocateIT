@@ -27,18 +27,11 @@ public class SignupActivity extends AppCompatActivity {
     private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
     private static final Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
 
+    // declare componenets
     private TextInputLayout inputLayoutName, inputLayoutSurname, inputLayoutEmail, inputLayoutPassword;
     private EditText etFirstname, etLastname, etEmail, etPassword;
-
     private FirebaseAuth mAuth;
-
     boolean flag = false;
-
-
-    public static boolean isValid(final String password) {
-        Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +96,12 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
+    // method used to check if the password is valid
+    public static boolean isValid(final String password) {
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
+
     // method to create an account for the user to use for the app
     private void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -134,6 +133,7 @@ public class SignupActivity extends AppCompatActivity {
         overridePendingTransition(0, 0);
     }
 
+    // get the username from the email
     private void getUsername() {
         // get substring of @ and use as username for user
 
@@ -143,6 +143,7 @@ public class SignupActivity extends AppCompatActivity {
         CurrentUser.email = etEmail.getText().toString().toLowerCase();
     }
 
+    // validate the users name
     private boolean validateName() {
 
         String input = inputLayoutName.getEditText().getText().toString().trim();
@@ -156,6 +157,7 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
+    // validate the users surname input
     private boolean validateSurname() {
 
         String input = inputLayoutSurname.getEditText().getText().toString().trim();
@@ -169,6 +171,7 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
+    // validate the users email
     private boolean validateEmail() {
 
         String input = inputLayoutEmail.getEditText().getText().toString().trim();
@@ -182,6 +185,7 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
+    // validate the users password
     private boolean validatePassword() {
 
         String input = inputLayoutPassword.getEditText().getText().toString().trim();
