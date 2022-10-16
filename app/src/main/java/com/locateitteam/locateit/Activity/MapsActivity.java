@@ -162,12 +162,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
 
-                // write to firebase
-                FirebaseUtil.WriteToFirebase(savedPlaceModel);
+                if(savedPlaceModel.getAddress() == null) {
 
-                Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
-                startActivity(i);
-                //Toast.makeText(MapsActivity.this, "Coming soon bi-otch", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
+                    startActivity(i);
+
+
+                }else{
+                    // write to firebase
+                    FirebaseUtil.WriteToFirebase(savedPlaceModel);
+                    Toast.makeText(MapsActivity.this, savedPlaceModel.getName()+" has been saved to favourite locations ", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
+                    startActivity(i);
+                }
 
 
             }
