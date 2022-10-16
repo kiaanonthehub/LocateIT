@@ -16,6 +16,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -225,8 +226,12 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
                                 "&mode=" + traveltype +
                                 "&units=" + units+
                                 "&key=" + getResources().getString(R.string.google_api_key_places);
+
+                        binding.svSetTravelType.setVisibility(View.INVISIBLE);
                     }
                     else{
+                        binding.svSetTravelType.setVisibility(View.VISIBLE);
+
                         url = "https://maps.googleapis.com/maps/api/directions/json?" +
                                 "origin=" + deviceLatlong.latitude + "," + deviceLatlong.longitude +
                                 "&destination=" + destinationLatLong.latitude + "," + destinationLatLong.longitude +

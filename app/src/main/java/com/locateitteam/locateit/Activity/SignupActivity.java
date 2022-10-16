@@ -12,9 +12,11 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.locateitteam.locateit.Model.SettingModel;
 import com.locateitteam.locateit.Model.UserModel;
 import com.locateitteam.locateit.R;
 import com.locateitteam.locateit.Util.CurrentUser;
+import com.locateitteam.locateit.Util.FirebaseUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -111,6 +113,7 @@ public class SignupActivity extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "createUserWithEmail:success");
                         getUsername();
+                        FirebaseUtil.WriteToFirebase(new SettingModel("Kilometers","Default","Driving",false));
                         flag = true;
 
                     } else {
@@ -141,6 +144,7 @@ public class SignupActivity extends AppCompatActivity {
         String[] split = s.replace(".", "").split("@");
         CurrentUser.displayName = split[0].toLowerCase();
         CurrentUser.email = etEmail.getText().toString().toLowerCase();
+        CurrentUser.userId = split[0].toLowerCase();
     }
 
     // validate the users name
