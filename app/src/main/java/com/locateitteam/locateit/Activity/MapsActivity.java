@@ -249,7 +249,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         if (addressLst.size() != 0) {
                             Address address = addressLst.get(0);
                             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in " + location));
+                            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in " + location).snippet(address.getAddressLine(0)));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             destinationLatLong = latLng;
 
