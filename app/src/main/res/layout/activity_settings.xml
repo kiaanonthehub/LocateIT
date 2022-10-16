@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.125" />
 
     <Spinner
-        android:id="@+id/spinnerFilteredLocation"
+        android:id="@+id/spinnerMapType"
         android:layout_width="338dp"
         android:layout_height="48dp"
         android:contentDescription="@string/app_name"
@@ -31,6 +31,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.235" />
+
+    <Spinner
+        android:id="@+id/spinnerTravelType"
+        android:layout_width="338dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/app_name"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.346" />
 
     <TextView
         android:id="@+id/textViewLogin"
@@ -49,11 +62,10 @@
         android:id="@+id/btnSaveSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351" />
+        app:layout_constraintVertical_bias="0.456" />
 </androidx.constraintlayout.widget.ConstraintLayout>

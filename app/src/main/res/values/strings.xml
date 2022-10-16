@@ -21,12 +21,17 @@
         <item>Miles</item>
     </string-array>
 
-    <string-array name="FilteredLocations">
-        <item>Groceries</item>
-        <item>Petrol</item>
-        <item>ATMs</item>
-        <item>Restaurants</item>
-        <item>Shopping Centres</item>
+    <string-array name="MapType">
+        <item>Default</item>
+        <item>Satellite</item>
+        <item>Terrain</item>
+    </string-array>
+
+    <string-array name="ModeOfTravel">
+        <item>Diving</item>
+        <item>Walking</item>
+        <item>Cycling</item>
+        <item>Transit </item>
     </string-array>
 
 </resources>
