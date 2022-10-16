@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
     //Components
     Spinner spinnerMetric,spinnerPreferredMapType,spinnerPreferredTransit;
     Button btnSave;
+    Switch swActivate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class SettingsActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSaveSettings);
         spinnerPreferredMapType = findViewById(R.id.spinnerMapType);
         spinnerPreferredTransit = findViewById(R.id.spinnerTravelType);
+        swActivate = findViewById(R.id.switchActivtate);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SettingsActivity.this, R.array.MetricSelections, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -65,14 +68,16 @@ public class SettingsActivity extends AppCompatActivity {
 
                 // comment this link https://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
                 if(list.size()>0){
-                    int spinnerPosition = adapter.getPosition(list.get(0));
+                    int spinnerPosition = adapter.getPosition(list.get(1));
                     spinnerMetric.setSelection(spinnerPosition);
 
-                    spinnerPosition = MapTypeAdapter.getPosition(list.get(1));
+                    spinnerPosition = MapTypeAdapter.getPosition(list.get(2));
                     spinnerPreferredMapType.setSelection(spinnerPosition);
 
-                    spinnerPosition = TravelTypeAdapter.getPosition(list.get(2));
+                    spinnerPosition = TravelTypeAdapter.getPosition(list.get(3));
                     spinnerPreferredTransit.setSelection(spinnerPosition);
+
+                    swActivate.setChecked(Boolean.parseBoolean(list.get(0)));
                 }
 
             }
@@ -88,9 +93,9 @@ public class SettingsActivity extends AppCompatActivity {
                 CurrentUser.metricSelection = spinnerMetric.getSelectedItem().toString();
                 CurrentUser.MapType = spinnerPreferredMapType.getSelectedItem().toString();
                 CurrentUser.TravelType = spinnerPreferredTransit.getSelectedItem().toString();
-
+                CurrentUser.activateSettings = swActivate.isChecked();
                 // write to firebase
-                FirebaseUtil.WriteToFirebase(new SettingModel(CurrentUser.metricSelection, CurrentUser.MapType,CurrentUser.TravelType));
+                FirebaseUtil.WriteToFirebase(new SettingModel(CurrentUser.metricSelection, CurrentUser.MapType,CurrentUser.TravelType,CurrentUser.activateSettings));
 
                 Intent i = new Intent(SettingsActivity.this, MapsActivity.class);
                 startActivity(i);
