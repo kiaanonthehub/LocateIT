@@ -28,10 +28,10 @@
     </string-array>
 
     <string-array name="ModeOfTravel">
-        <item>Diving</item>
+        <item>Driving</item>
         <item>Walking</item>
         <item>Cycling</item>
-        <item>Transit </item>
+        <item>Transit</item>
     </string-array>
 
 </resources>
