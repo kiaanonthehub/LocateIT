@@ -46,6 +46,8 @@ import com.locateitteam.locateit.Constant.AllConstant;
 import com.locateitteam.locateit.GoogleAPI.FetchData;
 import com.locateitteam.locateit.Model.PlaceModel;
 import com.locateitteam.locateit.R;
+import com.locateitteam.locateit.SavedPlaceModel;
+import com.locateitteam.locateit.Util.FirebaseUtil;
 import com.locateitteam.locateit.databinding.ActivityMapsBinding;
 
 import java.io.IOException;
@@ -61,16 +63,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     public static LatLng deviceLatlong, destinationLatLong;
+    // test instance of class for - SavedLocation
+    SavedPlaceModel savedPlaceModel = new SavedPlaceModel();
     private boolean mLocationPermissionGranted = false;
     private boolean isLocationPermissionOk, isTrafficEnable;
-
     // map fields
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
     private ActivityMapsBinding binding;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private PlaceModel selectedPlaceModel;
-
     // component fields
     private SearchView searchView;
 
@@ -160,9 +162,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding.btnFavLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent i = new Intent(MapsActivity.this, DirectionActivity.class);
-                //startActivity(i);
-                Toast.makeText(MapsActivity.this, "Coming soon bi-otch", Toast.LENGTH_SHORT).show();
+
+                // write to firebase
+                FirebaseUtil.WriteToFirebase(savedPlaceModel);
+
+                Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
+                startActivity(i);
+                //Toast.makeText(MapsActivity.this, "Coming soon bi-otch", Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
@@ -234,6 +242,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in " + location));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             destinationLatLong = latLng;
+
+                            // demo
+                            if (address.getThoroughfare() != null) {
+                                savedPlaceModel.setName(address.getFeatureName() + ", " + address.getThoroughfare());
+
+                            } else {
+                                savedPlaceModel.setName(address.getFeatureName());
+                            }
+                            savedPlaceModel.setAddress(address.getAddressLine(0));
+                            savedPlaceModel.setLat(latLng.latitude);
+                            savedPlaceModel.setLng(latLng.longitude);
+
                         } else {
 
                         }
@@ -377,4 +397,3 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fetchData.execute(dataFetch);
     }
 }
-

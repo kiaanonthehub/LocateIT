@@ -32,6 +32,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.locateitteam.locateit.R;
 import com.locateitteam.locateit.Util.CurrentUser;
+import com.locateitteam.locateit.Util.Global;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -50,18 +51,18 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    //Firebase Auth
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user!=null){
-            Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
-            startActivity(intent);
-            getUsername();
-        }
-
-    }
+//    Firebase Auth
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        if(CurrentUser.userId!= " "){
+//            Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+//            startActivity(intent);
+//            getUsername();
+//        }
+//
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
 
             // initialise variables
             email = etEmail.getText().toString().trim();
+            CurrentUser.userId = getUsername();
             password = etPassword.getText().toString().trim();
 
             // method call to sign into an existing  account
@@ -243,13 +245,14 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(getIntent());
     }
 
-    private void getUsername() {
+    private String getUsername() {
         // get substring of @ and use as username for user
 
         String s = etEmail.getText().toString();
         String[] split = s.replace(".","").split("@");
         CurrentUser.displayName = split[0].toLowerCase();
         CurrentUser.email = etEmail.getText().toString().toLowerCase();
+        return  split[0].toLowerCase();
     }
 
     private void getGoogleUsername(String email) {

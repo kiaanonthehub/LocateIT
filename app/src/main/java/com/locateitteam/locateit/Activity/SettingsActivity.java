@@ -30,8 +30,9 @@ public class SettingsActivity extends AppCompatActivity {
     //Variables
     public boolean isMiles = false;
     //Components
-    Spinner spinnerMetric, spinnerPreferredLandmark;
-    Button btnSave, btnLogout;
+    Spinner spinnerMetric,spinnerPreferredMapType,spinnerPreferredTransit;
+    Button btnSave;
+    Button  btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +42,21 @@ public class SettingsActivity extends AppCompatActivity {
         // initialise components
         spinnerMetric = findViewById(R.id.spinnerMetricSetting);
         btnSave = findViewById(R.id.btnSaveSettings);
+        spinnerPreferredMapType = findViewById(R.id.spinnerMapType);
+        spinnerPreferredTransit = findViewById(R.id.spinnerTravelType);
         btnLogout = findViewById(R.id.btnLogout);
-        spinnerPreferredLandmark = findViewById(R.id.spinnerFilteredLocation);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SettingsActivity.this, R.array.MetricSelections, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerMetric.setAdapter(adapter);
 
-        ArrayAdapter<CharSequence> landmarkAdapter = ArrayAdapter.createFromResource(SettingsActivity.this, R.array.FilteredLocations, android.R.layout.simple_spinner_item);
-        landmarkAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        spinnerPreferredLandmark.setAdapter(landmarkAdapter);
+        ArrayAdapter<CharSequence> MapTypeAdapter = ArrayAdapter.createFromResource(SettingsActivity.this, R.array.MapType, android.R.layout.simple_spinner_item);
+        MapTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinnerPreferredMapType.setAdapter(MapTypeAdapter);
+
+        ArrayAdapter<CharSequence> TravelTypeAdapter = ArrayAdapter.createFromResource(SettingsActivity.this, R.array.ModeOfTravel, android.R.layout.simple_spinner_item);
+        TravelTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinnerPreferredTransit.setAdapter(TravelTypeAdapter);
 
         FirebaseUtil.mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -65,11 +71,16 @@ public class SettingsActivity extends AppCompatActivity {
                 }
 
                 // comment this link https://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
-                int spinnerPosition = adapter.getPosition(list.get(0));
-                spinnerMetric.setSelection(spinnerPosition);
+                if(list.size()>0){
+                    int spinnerPosition = adapter.getPosition(list.get(0));
+                    spinnerMetric.setSelection(spinnerPosition);
 
-                spinnerPosition = landmarkAdapter.getPosition(list.get(1));
-                spinnerPreferredLandmark.setSelection(spinnerPosition);
+                    spinnerPosition = MapTypeAdapter.getPosition(list.get(1));
+                    spinnerPreferredMapType.setSelection(spinnerPosition);
+
+                    spinnerPosition = TravelTypeAdapter.getPosition(list.get(2));
+                    spinnerPreferredTransit.setSelection(spinnerPosition);
+                }
 
             }
 
@@ -84,10 +95,11 @@ public class SettingsActivity extends AppCompatActivity {
 
                 // get the users selection from the ui and populate the current users settings
                 CurrentUser.metricSelection = spinnerMetric.getSelectedItem().toString();
-                CurrentUser.filteredLocation = spinnerPreferredLandmark.getSelectedItem().toString();
+                CurrentUser.MapType = spinnerPreferredMapType.getSelectedItem().toString();
+                CurrentUser.TravelType = spinnerPreferredTransit.getSelectedItem().toString();
 
                 // write to firebase
-                FirebaseUtil.WriteToFirebase(new SettingModel(CurrentUser.metricSelection, CurrentUser.filteredLocation));
+                FirebaseUtil.WriteToFirebase(new SettingModel(CurrentUser.metricSelection, CurrentUser.MapType,CurrentUser.TravelType));
 
                 Intent i = new Intent(SettingsActivity.this, MapsActivity.class);
                 startActivity(i);

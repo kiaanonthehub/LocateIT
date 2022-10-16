@@ -4,17 +4,19 @@ public class SettingModel {
 
     // variables
     String metric;
-    String preferredLandmark;
+    String preferredMapType;
+    String preferredTravelType;
 
     // constructor
-    public SettingModel(String metric, String preferredLandmark) {
+    public SettingModel(String metric, String preferredLandmark, String preferredTravelType) {
         this.metric = metric;
-        this.preferredLandmark = preferredLandmark;
+        this.preferredMapType = preferredLandmark;
+        this.preferredTravelType = preferredTravelType;
     }
 
     // preferredLandmark constructor
     public SettingModel(String preferredLandmark) {
-        this.preferredLandmark = preferredLandmark;
+        this.preferredMapType = preferredLandmark;
     }
 
     // blank constructor
@@ -30,11 +32,19 @@ public class SettingModel {
         this.metric = metric;
     }
 
-    public String getPreferredLandmark() {
-        return preferredLandmark;
+    public String getPreferredMapType() {
+        return preferredMapType;
     }
 
-    public void setPreferredLandmark(String preferredLandmark) {
-        this.preferredLandmark = preferredLandmark;
+    public void setPreferredMapType(String preferredMapType) {
+        this.preferredMapType = preferredMapType;
+    }
+
+    public String getPreferredTravelType() {
+        return preferredTravelType;
+    }
+
+    public void setPreferredTravelType(String preferredTravelType) {
+        this.preferredTravelType = preferredTravelType;
     }
 }
