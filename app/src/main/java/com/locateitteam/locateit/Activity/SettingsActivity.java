@@ -111,8 +111,7 @@ public class SettingsActivity extends AppCompatActivity {
                 // write to firebase
                 FirebaseUtil.WriteToFirebase(new SettingModel(CurrentUser.metricSelection, CurrentUser.MapType,CurrentUser.TravelType,CurrentUser.activateSettings));
 
-                Intent i = new Intent(SettingsActivity.this, MapsActivity.class);
-                startActivity(i);
+                finish();
             }
         });
 
