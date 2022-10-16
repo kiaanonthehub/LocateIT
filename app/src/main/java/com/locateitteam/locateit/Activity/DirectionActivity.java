@@ -231,7 +231,8 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
 
                                 options.addAll(stepList);
 
-                                //Polyline polyline = mGoogleMap.addPolyline(options);
+                                // used to draw route onto the map
+                                Polyline polyline = mGoogleMap.addPolyline(options);
                                 LatLng startLocation = new LatLng(legModel.getStartLocation().getLat(), legModel.getStartLocation().getLng());
                                 LatLng endLocation = new LatLng(legModel.getStartLocation().getLat(), legModel.getStartLocation().getLng());
 
