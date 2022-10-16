@@ -9,5 +9,6 @@ public class CurrentUser {
     public static String metricSelection;
     public static String MapType;
     public static String TravelType;
+    public static boolean activateSettings;
 
 }
