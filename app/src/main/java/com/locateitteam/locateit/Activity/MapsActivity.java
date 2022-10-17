@@ -47,7 +47,7 @@ import com.locateitteam.locateit.databinding.ActivityMapsBinding;
 import java.io.IOException;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
     // declare and initialise fields
     private static final String TAG = "MapActivity";
@@ -104,6 +104,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             });
             locationDialog.create().show();
         }
+
+        //Autocomplete search bar
+        String apiKey = getString(R.string.api_key);
+
+//        //Initialize Places
+//        if (!Places.isInitialized()) {
+//            Places.initialize(MapsActivity.this, apiKey);
+//        }
+//
+//        // Create a new Places client instance.
+//        PlacesClient placesClient = Places.createClient(this);
+//        // Initialize the AutocompleteSupportFragment.
+//        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+//                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+//
+//        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+//
+//        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+//            @Override
+//            public void onPlaceSelected(Place place) {
+//                // TODO: Get info about the selected place.
+//                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+//            }
+//
+//            @Override
+//            public void onError(Status status) {
+//                // TODO: Handle the error.
+//                Log.i(TAG, "An error occurred: " + status);
+//            }
+//        });
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -170,6 +200,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //Toast.makeText(MapsActivity.this, "Coming soon bi-otch", Toast.LENGTH_SHORT).show();
 
 
+            }
+        });
+
+        // help fragment
+        binding.btnHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapsActivity.this, HelpActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -246,6 +285,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in " + location));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             destinationLatLong = latLng;
+                            //mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
 
                             // demo
                             if (address.getThoroughfare() != null) {

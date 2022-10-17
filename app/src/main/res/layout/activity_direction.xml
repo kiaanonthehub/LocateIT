@@ -74,7 +74,7 @@
                     android:layout_marginTop="10dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="asdgahsyd"
+                    android:text= "Loading..."
                     android:textColor="@color/blue_500"
                     android:textStyle="bold" />
 
@@ -117,7 +117,7 @@
                     android:layout_marginTop="10dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="asdgahsyd"
+                    android:text="Loading..."
                     android:textColor="@color/blue_500"
                     android:textStyle="bold" />
 

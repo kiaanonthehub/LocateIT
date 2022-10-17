@@ -15,9 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LocateIT"
-        tools:targetApi="31">
+        tools:targetApi="32">
         <activity
             android:name=".Activity.SavedLocationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.HelpActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.DirectionActivity"
