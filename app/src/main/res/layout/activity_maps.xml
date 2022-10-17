@@ -52,9 +52,7 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.068"
-        app:queryBackground="@drawable/bg_white_rounded"
-        app:submitBackground="@drawable/bg_white_rounded" />
+        app:layout_constraintVertical_bias="0.068" />
 
     <HorizontalScrollView
         android:id="@+id/placesList"

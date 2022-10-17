@@ -74,7 +74,7 @@
                     android:layout_marginTop="10dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="asdgahsyd"
+                    android:text="Current location"
                     android:textColor="@color/blue_500"
                     android:textStyle="bold" />
 
@@ -117,7 +117,7 @@
                     android:layout_marginTop="10dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="asdgahsyd"
+                    android:text="Destination"
                     android:textColor="@color/blue_500"
                     android:textStyle="bold" />
 
@@ -132,7 +132,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
-            android:scrollbars="none">
+            android:scrollbars="none"
+            android:id="@+id/svSetTravelType">
 
 
             <com.google.android.material.chip.ChipGroup
