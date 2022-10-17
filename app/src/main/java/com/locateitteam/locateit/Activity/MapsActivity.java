@@ -30,6 +30,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -62,14 +63,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     SavedPlaceModel savedPlaceModel = new SavedPlaceModel();
     private boolean mLocationPermissionGranted = false;
     private boolean isLocationPermissionOk, isTrafficEnable;
-
     // map fields
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
     private ActivityMapsBinding binding;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private PlaceModel selectedPlaceModel;
-
     // component fields
     private SearchView searchView;
 
@@ -154,8 +153,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             chip.setCheckedIconVisible(false);
 
             binding.placesGroup.addView(chip);
-
-
         }
 
         binding.placesGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
@@ -166,6 +163,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     PlaceModel placeModel = AllConstant.placesName.get(checkedId - 1);
                     selectedPlaceModel = placeModel;
                     FindPlaceType(placeModel.getPlaceType());
+
+                        displayMarkerInfo();
                 }
             }
         });
@@ -192,12 +191,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
 
-                // write to firebase
-                FirebaseUtil.WriteToFirebase(savedPlaceModel);
+                if (savedPlaceModel.getAddress() == null) {
 
-                Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
-                startActivity(i);
-                //Toast.makeText(MapsActivity.this, "Coming soon bi-otch", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
+                    startActivity(i);
+
+
+                } else {
+                    // write to firebase
+                    FirebaseUtil.WriteToFirebase(savedPlaceModel);
+                    Toast.makeText(MapsActivity.this, savedPlaceModel.getName() + " has been saved to favourite locations ", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
+                    startActivity(i);
+                }
 
 
             }
@@ -282,7 +288,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         if (addressLst.size() != 0) {
                             Address address = addressLst.get(0);
                             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in " + location));
+                            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in " + location).snippet(address.getAddressLine(0)));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             destinationLatLong = latLng;
                             //mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
@@ -297,6 +303,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             savedPlaceModel.setAddress(address.getAddressLine(0));
                             savedPlaceModel.setLat(latLng.latitude);
                             savedPlaceModel.setLng(latLng.longitude);
+                                displayMarkerInfo();
 
                         } else {
 
@@ -439,5 +446,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         FetchData fetchData = new FetchData();
         fetchData.execute(dataFetch);
+    }
+
+    private void displayMarkerInfo(){
+        mMap.setOnMarkerClickListener(marker -> {
+            MarkerOptions markerOptions = new MarkerOptions();
+
+            destinationLatLong = null;
+
+            // Setting the position for the marker
+            //Toast.makeText(MapsActivity.this, "Select the direction button to navigate to :"+marker.getTitle() , Toast.LENGTH_SHORT).show(); // get Latlong
+
+            marker.showInfoWindow();
+
+            destinationLatLong = marker.getPosition();
+
+            return true;
+        });
     }
 }
