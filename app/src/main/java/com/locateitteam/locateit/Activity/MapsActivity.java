@@ -154,7 +154,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             binding.placesGroup.addView(chip);
         }
-
         binding.placesGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(ChipGroup group, int checkedId) {
@@ -191,44 +190,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
 
-                List<Address> addressLst = null;
+                    Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
+                    startActivity(i);
+            }
+        });
+
+        binding.btnBookmarkFavLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(savedPlaceModel.getName()!= null){
+                    List<Address> addressLst = null;
 
                     //https://youtu.be/R6hev9p_qW8
                     Geocoder geocoder = new Geocoder(MapsActivity.this);
 
-                    //if(destinationLatLong != null){
-                        try {
-                            addressLst = geocoder.getFromLocation(destinationLatLong.latitude,destinationLatLong.longitude, 1);
-                            if (addressLst.size() != 0) {
-                                Address address = addressLst.get(0);
+                    try {
+                        addressLst = geocoder.getFromLocation(destinationLatLong.latitude,destinationLatLong.longitude, 1);
+                        if (addressLst.size() != 0) {
+                            Address address = addressLst.get(0);
 
-                                savedPlaceModel.setAddress(address.getAddressLine(0));
-                                savedPlaceModel.setLat(destinationLatLong.latitude);
-                                savedPlaceModel.setLng(destinationLatLong.longitude);
-                                displayMarkerInfo();
+                            savedPlaceModel.setAddress(address.getAddressLine(0));
+                            savedPlaceModel.setLat(destinationLatLong.latitude);
+                            savedPlaceModel.setLng(destinationLatLong.longitude);
+                            displayMarkerInfo();
 
-                            } else {
-
-                            }
-                        } catch (IOException e) {
+                        } else {
 
                         }
-                    //}
+                    } catch (IOException e) {
 
-                if (savedPlaceModel.getAddress() == null) {
+                    }
 
-                    Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
-                    startActivity(i);
-
-
-                } else {
                     // write to firebase
                     FirebaseUtil.WriteToFirebase(savedPlaceModel);
                     Toast.makeText(MapsActivity.this, savedPlaceModel.getName() + " has been saved to favourite locations ", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
-                    startActivity(i);
-                }
 
+                }
+                else{
+                    Toast.makeText(MapsActivity.this, "Click on a marker to save to favourite locations ", Toast.LENGTH_SHORT).show();
+
+                }
 
             }
         });
