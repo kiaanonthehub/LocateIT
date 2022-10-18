@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.SettingsActivity">
+    tools:context=".Activity.SettingsActivity"
+    android:background="@drawable/bg_gradient">
 
     <Spinner
         android:id="@+id/spinnerMetricSetting"
         android:layout_width="338dp"
         android:layout_height="48dp"
+        android:dropDownHeight="match_parent"
+        android:background="@drawable/bg_white_rounded"
         android:layout_marginTop="85dp"
         android:layout_marginBottom="192dp"
         android:contentDescription="@string/app_name"
@@ -26,6 +29,7 @@
         android:layout_width="338dp"
         android:layout_height="48dp"
         android:contentDescription="@string/app_name"
+        android:background="@drawable/bg_white_rounded"
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +43,7 @@
         android:layout_width="338dp"
         android:layout_height="48dp"
         android:contentDescription="@string/app_name"
+        android:background="@drawable/bg_white_rounded"
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

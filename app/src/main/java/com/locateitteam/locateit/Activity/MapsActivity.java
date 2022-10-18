@@ -48,7 +48,7 @@ import com.locateitteam.locateit.databinding.ActivityMapsBinding;
 import java.io.IOException;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
     // declare and initialise fields
     private static final String TAG = "MapActivity";
@@ -78,31 +78,61 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        //Location services check
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        //Location services check
+//        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//
+//        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+//
+//            //here do what you want when the GPS service is enabled
+//
+//            Toast.makeText(MapsActivity.this, "GPS is enabled", Toast.LENGTH_SHORT).show();
+//
+//        } else {
+//
+//            // dialog prompt box
+//            MaterialAlertDialogBuilder locationDialog = new MaterialAlertDialogBuilder(MapsActivity.this);
+//            locationDialog.setTitle("Attention");
+//            locationDialog.setMessage("Location settings must be enabled from the settings to use the application");
+//            locationDialog.setCancelable(false);
+//            locationDialog.setPositiveButton("Open settings", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//                    startActivity(intent);
+//                }
+//            });
+//            locationDialog.create().show();
+//        }
 
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        //Autocomplete search bar
+        String apiKey = getString(R.string.api_key);
 
-            //here do what you want when the GPS service is enabled
-
-            Toast.makeText(MapsActivity.this, "GPS is enabled", Toast.LENGTH_SHORT).show();
-
-        } else {
-
-            // dialog prompt box
-            MaterialAlertDialogBuilder locationDialog = new MaterialAlertDialogBuilder(MapsActivity.this);
-            locationDialog.setTitle("Attention");
-            locationDialog.setMessage("Location settings must be enabled from the settings to use the application");
-            locationDialog.setCancelable(false);
-            locationDialog.setPositiveButton("Open settings", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivity(intent);
-                }
-            });
-            locationDialog.create().show();
-        }
+//        //Initialize Places
+//        if (!Places.isInitialized()) {
+//            Places.initialize(MapsActivity.this, apiKey);
+//        }
+//
+//        // Create a new Places client instance.
+//        PlacesClient placesClient = Places.createClient(this);
+//        // Initialize the AutocompleteSupportFragment.
+//        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+//                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+//
+//        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+//
+//        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+//            @Override
+//            public void onPlaceSelected(Place place) {
+//                // TODO: Get info about the selected place.
+//                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+//            }
+//
+//            @Override
+//            public void onError(Status status) {
+//                // TODO: Handle the error.
+//                Log.i(TAG, "An error occurred: " + status);
+//            }
+//        });
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -124,7 +154,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             binding.placesGroup.addView(chip);
         }
-
         binding.placesGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(ChipGroup group, int checkedId) {
@@ -156,58 +185,62 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         });
 
-        // button to view saved locations
-        binding.btnFavLocationBookmark.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                List<Address> addressLst = null;
-
-                    //https://youtu.be/R6hev9p_qW8
-                    Geocoder geocoder = new Geocoder(MapsActivity.this);
-
-                    //if(destinationLatLong != null){
-                        try {
-                            addressLst = geocoder.getFromLocation(destinationLatLong.latitude,destinationLatLong.longitude, 1);
-                            if (addressLst.size() != 0) {
-                                Address address = addressLst.get(0);
-
-                                savedPlaceModel.setAddress(address.getAddressLine(0));
-                                savedPlaceModel.setLat(destinationLatLong.latitude);
-                                savedPlaceModel.setLng(destinationLatLong.longitude);
-                                displayMarkerInfo();
-
-                            } else {
-
-                            }
-                        } catch (IOException e) {
-
-                        }
-                    //}
-
-                if (savedPlaceModel.getAddress() == null) {
-
-                    Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
-                    startActivity(i);
-
-
-                } else {
-                    // write to firebase
-                    FirebaseUtil.WriteToFirebase(savedPlaceModel);
-                    Toast.makeText(MapsActivity.this, savedPlaceModel.getName() + " has been saved to favourite locations ", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
-                    startActivity(i);
-                }
-
-
-            }
-        });
-
-        // this is the button to fav a location
+        // location fab
         binding.btnFavLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                    Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
+                    startActivity(i);
+            }
+        });
+
+        binding.btnBookmarkFavLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(savedPlaceModel.getName()!= null){
+                    List<Address> addressLst = null;
+
+                    //https://youtu.be/R6hev9p_qW8
+                    Geocoder geocoder = new Geocoder(MapsActivity.this);
+
+                    try {
+                        addressLst = geocoder.getFromLocation(destinationLatLong.latitude,destinationLatLong.longitude, 1);
+                        if (addressLst.size() != 0) {
+                            Address address = addressLst.get(0);
+
+                            savedPlaceModel.setAddress(address.getAddressLine(0));
+                            savedPlaceModel.setLat(destinationLatLong.latitude);
+                            savedPlaceModel.setLng(destinationLatLong.longitude);
+                            displayMarkerInfo();
+
+                        } else {
+
+                        }
+                    } catch (IOException e) {
+
+                    }
+
+                    // write to firebase
+                    FirebaseUtil.WriteToFirebase(savedPlaceModel);
+                    Toast.makeText(MapsActivity.this, savedPlaceModel.getName() + " has been saved to favourite locations ", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    Toast.makeText(MapsActivity.this, "Click on a marker to save to favourite locations ", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
+
+        // help fragment
+        binding.btnHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapsActivity.this, HelpActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -284,6 +317,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in " + location).snippet(address.getAddressLine(0)));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             destinationLatLong = latLng;
+                            //mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
 
                             // demo
                             if (address.getThoroughfare() != null) {

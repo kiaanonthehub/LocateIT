@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:maxLines="1"
-            android:text="Prince Oizza"
+            android:text="Location Name"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
