@@ -133,6 +133,21 @@
         app:tint="@color/blue_grey" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnBookmarkFavLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/placesList"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="223dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/ic_baseline_bookmark_border_24"
+        app:backgroundTint="@color/white"
+        app:fabCustomSize="40dp"
+        app:tint="@color/blue_grey" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnHelp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
