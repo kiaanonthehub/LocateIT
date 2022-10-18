@@ -6,8 +6,12 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +25,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -68,6 +73,32 @@ public class LoginActivity extends AppCompatActivity {
 
         //Force dark mode off
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        //Location services check
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+
+            //here do what you want when the GPS service is enabled
+
+            Toast.makeText(LoginActivity.this, "GPS is enabled", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            // dialog prompt box
+            MaterialAlertDialogBuilder locationDialog = new MaterialAlertDialogBuilder(LoginActivity.this);
+            locationDialog.setTitle("Attention");
+            locationDialog.setMessage("Location settings must be enabled from the settings to use the application");
+            locationDialog.setCancelable(false);
+            locationDialog.setPositiveButton("Open settings", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+            });
+            locationDialog.create().show();
+        }
 
         // initialise mAuth
         mAuth = FirebaseAuth.getInstance();

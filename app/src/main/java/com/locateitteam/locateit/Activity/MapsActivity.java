@@ -78,31 +78,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        //Location services check
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-
-            //here do what you want when the GPS service is enabled
-
-            Toast.makeText(MapsActivity.this, "GPS is enabled", Toast.LENGTH_SHORT).show();
-
-        } else {
-
-            // dialog prompt box
-            MaterialAlertDialogBuilder locationDialog = new MaterialAlertDialogBuilder(MapsActivity.this);
-            locationDialog.setTitle("Attention");
-            locationDialog.setMessage("Location settings must be enabled from the settings to use the application");
-            locationDialog.setCancelable(false);
-            locationDialog.setPositiveButton("Open settings", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivity(intent);
-                }
-            });
-            locationDialog.create().show();
-        }
+//        //Location services check
+//        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//
+//        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+//
+//            //here do what you want when the GPS service is enabled
+//
+//            Toast.makeText(MapsActivity.this, "GPS is enabled", Toast.LENGTH_SHORT).show();
+//
+//        } else {
+//
+//            // dialog prompt box
+//            MaterialAlertDialogBuilder locationDialog = new MaterialAlertDialogBuilder(MapsActivity.this);
+//            locationDialog.setTitle("Attention");
+//            locationDialog.setMessage("Location settings must be enabled from the settings to use the application");
+//            locationDialog.setCancelable(false);
+//            locationDialog.setPositiveButton("Open settings", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//                    startActivity(intent);
+//                }
+//            });
+//            locationDialog.create().show();
+//        }
 
         //Autocomplete search bar
         String apiKey = getString(R.string.api_key);
