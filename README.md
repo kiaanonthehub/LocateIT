@@ -32,6 +32,9 @@ view and recenter their current postion on the map. The user can also view the l
 - View direction to location
 - Search bar feature
 
+# Privacy policy
+Privacy Policy for Locate[IT] : https://www.freeprivacypolicy.com/live/3874c00a-b7dc-46f3-aca4-2ff8e976659d
+
 # Developers
 - [@kiaanonthehub](https://github.com/kiaanonthehub)
 - [@Tyler-Jagdew](https://github.com/Tyler-Jagdew)
