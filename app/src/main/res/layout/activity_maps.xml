@@ -107,16 +107,31 @@
         app:tint="@color/blue_grey" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnFavLocation"
+        android:id="@+id/btnFavLocationBookmark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="308dp"
-        android:src="@drawable/ic_baseline_star_outline_24"
+        android:src="@drawable/ic_baseline_bookmark_border_24"
         app:backgroundTint="@color/white"
         app:fabCustomSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.953"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/map"
+        app:tint="@color/blue_grey" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnFavLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="356dp"
+        android:src="@drawable/ic_baseline_star_outline_24"
+        app:backgroundTint="@color/white"
+        app:fabCustomSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/map"
         app:tint="@color/blue_grey" />

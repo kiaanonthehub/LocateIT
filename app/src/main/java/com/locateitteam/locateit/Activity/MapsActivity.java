@@ -156,8 +156,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         });
 
-        // location fab
-        binding.btnFavLocation.setOnClickListener(new View.OnClickListener() {
+        // button to view saved locations
+        binding.btnFavLocationBookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -199,6 +199,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     startActivity(i);
                 }
 
+
+            }
+        });
+
+        // this is the button to fav a location
+        binding.btnFavLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
             }
         });
