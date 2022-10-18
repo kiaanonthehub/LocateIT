@@ -191,6 +191,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
 
+                List<Address> addressLst = null;
+
+                    //https://youtu.be/R6hev9p_qW8
+                    Geocoder geocoder = new Geocoder(MapsActivity.this);
+
+                    //if(destinationLatLong != null){
+                        try {
+                            addressLst = geocoder.getFromLocation(destinationLatLong.latitude,destinationLatLong.longitude, 1);
+                            if (addressLst.size() != 0) {
+                                Address address = addressLst.get(0);
+
+                                savedPlaceModel.setAddress(address.getAddressLine(0));
+                                savedPlaceModel.setLat(destinationLatLong.latitude);
+                                savedPlaceModel.setLng(destinationLatLong.longitude);
+                                displayMarkerInfo();
+
+                            } else {
+
+                            }
+                        } catch (IOException e) {
+
+                        }
+                    //}
+
                 if (savedPlaceModel.getAddress() == null) {
 
                     Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
@@ -453,10 +477,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             MarkerOptions markerOptions = new MarkerOptions();
 
             destinationLatLong = null;
-
             // Setting the position for the marker
             //Toast.makeText(MapsActivity.this, "Select the direction button to navigate to :"+marker.getTitle() , Toast.LENGTH_SHORT).show(); // get Latlong
 
+            savedPlaceModel.setName(marker.getTitle());
             marker.showInfoWindow();
 
             destinationLatLong = marker.getPosition();
