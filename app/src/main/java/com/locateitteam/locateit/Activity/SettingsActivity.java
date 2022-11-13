@@ -34,6 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
     Spinner spinnerMetric,spinnerPreferredMapType,spinnerPreferredTransit;
     Button btnSave;
     Button  btnLogout;
+    Button btnShare;
     Switch swActivate;
 
     @Override
@@ -48,6 +49,7 @@ public class SettingsActivity extends AppCompatActivity {
         spinnerPreferredTransit = findViewById(R.id.spinnerTravelType);
         swActivate = findViewById(R.id.switchActivtate);
         btnLogout = findViewById(R.id.btnLogout);
+        btnShare = findViewById(R.id.btnShare);
 
         // initilise adapter to read current settings from user in firebase
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SettingsActivity.this, R.array.MetricSelections, android.R.layout.simple_spinner_item);
@@ -195,6 +197,14 @@ public class SettingsActivity extends AppCompatActivity {
                 dialog.dismiss();
 
             });
+
+            // share app
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // @Tyler
+            }
+        });
 
             // create and display the dialog
             AlertDialog alert = builder.create();
