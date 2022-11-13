@@ -123,42 +123,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
     }
-//    private void promptLogoutConfirmation() {
-//        //Use the context of current activity
-//        final AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-//        builder.setTitle("Logout");
-//        builder.setIcon(R.drawable.ic_logout);
-//        builder.setMessage("Are you sure you want to logout ?");
-//        builder.setCancelable(true);
-//
-//        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                FirebaseAuth.getInstance().signOut();
-//                GoogleSignIn.getClient(
-//                        SettingsActivity.this,
-//                        new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
-//                ).signOut();
-//                Intent logoutIntent = new Intent(SettingsActivity.this, LoginActivity.class);
-//                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);//flags to clear your history
-//                startActivity(logoutIntent);
-//                dialogInterface.dismiss();
-//                finish();
-//                //dont forget to clear any user related data in your preferences
-//            }
-//        });
-//
-//        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                dialogInterface.dismiss();
-//            }
-//        });
-//
-//
-//        AlertDialog alertDialog = builder.create();
-//        alertDialog.show();
-//    }
+
 
     private void logout() {
             // instantiate alert dialog object
@@ -197,14 +162,20 @@ public class SettingsActivity extends AppCompatActivity {
                 dialog.dismiss();
 
             });
-
+            //Button btnShare= findViewById(R.id.btnShare);
             // share app
-        btnShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // @Tyler
-            }
-        });
+          btnShare.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+          Intent intent=new Intent(Intent.ACTION_SEND);
+          intent.setType("text/plain");
+          String Body="Download this App";
+          String Sub="http://play.google.com";
+          intent.putExtra(Intent.EXTRA_TEXT,Body);
+          intent.putExtra(Intent.EXTRA_TEXT,Sub);
+          startActivity(Intent.createChooser(intent,"Share Using"));
+          }
+       });
 
             // create and display the dialog
             AlertDialog alert = builder.create();
