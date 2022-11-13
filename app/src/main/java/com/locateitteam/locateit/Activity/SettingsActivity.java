@@ -122,6 +122,21 @@ public class SettingsActivity extends AppCompatActivity {
             logout();
         });
 
+        //Button btnShare= findViewById(R.id.btnShare);
+        // share app
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                String Body="Download this App";
+                String Sub="https://play.google.com/store/apps/details?id=com.locateitteam.locateit";
+                intent.putExtra(Intent.EXTRA_TEXT,Body);
+                intent.putExtra(Intent.EXTRA_TEXT,Sub);
+                startActivity(Intent.createChooser(intent,"Share Using"));
+            }
+        });
+
     }
 
 
@@ -162,24 +177,12 @@ public class SettingsActivity extends AppCompatActivity {
                 dialog.dismiss();
 
             });
-            //Button btnShare= findViewById(R.id.btnShare);
-            // share app
-          btnShare.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-          Intent intent=new Intent(Intent.ACTION_SEND);
-          intent.setType("text/plain");
-          String Body="Download this App";
-          String Sub="http://play.google.com";
-          intent.putExtra(Intent.EXTRA_TEXT,Body);
-          intent.putExtra(Intent.EXTRA_TEXT,Sub);
-          startActivity(Intent.createChooser(intent,"Share Using"));
-          }
-       });
 
             // create and display the dialog
             AlertDialog alert = builder.create();
             alert.show();
 
         }
+
+
     }
