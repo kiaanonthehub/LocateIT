@@ -17,6 +17,9 @@
         android:theme="@style/Theme.LocateIT"
         tools:targetApi="32">
         <activity
+            android:name=".CreateNotesActivity"
+            android:exported="false" />
+        <activity
             android:name=".NotesActivity"
             android:exported="false" />
         <activity
