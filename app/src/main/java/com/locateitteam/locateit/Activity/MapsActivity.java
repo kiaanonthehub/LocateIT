@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.common.collect.Maps;
 import com.locateitteam.locateit.Constant.AllConstant;
 import com.locateitteam.locateit.GoogleAPI.FetchData;
 import com.locateitteam.locateit.Model.PlaceModel;
@@ -186,6 +187,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 Intent i = new Intent(MapsActivity.this, SavedLocationsActivity.class);
                 startActivity(i);
+            }
+        });
+
+        // notes
+        binding.btnNotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    startActivity(new Intent(MapsActivity.this,NotesActivity.class));
             }
         });
 

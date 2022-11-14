@@ -18,7 +18,8 @@
         tools:targetApi="32">
         <activity
             android:name=".CreateNotesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".NotesActivity"
             android:exported="false" />
