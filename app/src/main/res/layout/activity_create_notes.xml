@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activity.CreateNotesActivity">
 
-    <Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarofcreatenote"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -22,7 +22,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-    </Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <EditText
         android:id="@+id/createcontentofnote"

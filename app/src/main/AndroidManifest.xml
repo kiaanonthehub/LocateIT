@@ -17,11 +17,11 @@
         android:theme="@style/Theme.LocateIT"
         tools:targetApi="32">
         <activity
-            android:name=".CreateNotesActivity"
+            android:name=".Activity.CreateNotesActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
-            android:name=".NotesActivity"
+            android:name=".Activity.NotesActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.SavedLocationsActivity"

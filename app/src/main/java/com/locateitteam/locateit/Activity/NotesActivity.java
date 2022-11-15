@@ -30,7 +30,7 @@ public class NotesActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     FirebaseFirestore firebaseFirestore;
 
-    FirestoreRecyclerAdapter<firebasemodel,NoteViewHolder> noteAdapter;
+    //FirestoreRecyclerAdapter<firebasemodel,NoteViewHolder> noteAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +51,8 @@ public class NotesActivity extends AppCompatActivity {
             startActivity(new Intent(NotesActivity.this,CreateNotesActivity.class));
         });
 
-        Query query=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes").orderBy("Title",Query.Direction.ASCENDING);
-    FirestoreRecyclerOptions<firebasemodel> allusernotes= FirestoreRecyclerOptions.Builder<firebasemodel>().setQuery(query,firebasemodel.class).build();
+       // Query query=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes").orderBy("Title",Query.Direction.ASCENDING);
+   // FirestoreRecyclerOptions<firebasemodel> allusernotes= FirestoreRecyclerOptions.Builder<firebasemodel>().setQuery(query,firebasemodel.class).build();
     // time stamp @ 11:17 on PART 10
     }
 

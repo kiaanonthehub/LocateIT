@@ -43,7 +43,7 @@ public class CreateNotesActivity extends AppCompatActivity {
         createContent = findViewById(R.id.createcontentofnote);
         saveNote = findViewById(R.id.savenote);
 
-        Toolbar toolbar = findViewById(R.id.toolbarofcreatenote);
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbarofcreatenote);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
