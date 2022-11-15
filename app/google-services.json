@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "545814222598-mo21itca5eh0s5ba6k1pkf4mm3u6m6u6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.locateitteam.locateit",
+            "certificate_hash": "73017eb533f22214d9887e944428d962ee3c3d55"
+          }
+        },
+        {
           "client_id": "545814222598-mff6h7fidm5jmrjkdfiu5uh0op7ep5hd.apps.googleusercontent.com",
           "client_type": 3
         }

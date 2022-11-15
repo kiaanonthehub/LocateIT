@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.locateitteam.locateit.R;
+import com.locateitteam.locateit.Util.CurrentUser;
+import com.locateitteam.locateit.Util.Global;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,19 +58,19 @@ public class CreateNotesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // write to firestore
-                String title = createTitle.getText().toString();
-                String content = createContent.getText().toString();
+                String Title = createTitle.getText().toString();
+                String Content = createContent.getText().toString();
 
-                if (title.isEmpty() || content.isEmpty()) {
+                if (Title.isEmpty() || Content.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Tile and Content is requried", Toast.LENGTH_SHORT).show();
                 } else {
                     // store data
-                    DocumentReference documentReference = firebaseFirestore.collection("Notes").document(firebaseUser.getUid()).collection("myNotes").document();
+                    DocumentReference documentReference = firebaseFirestore.collection("Notes").document(CurrentUser.userId).collection("myNotes").document();
 
                     Map<String, Object> note = new HashMap<>();
 
-                    note.put("Title", title);
-                    note.put("Content", content);
+                    note.put("Title", Title);
+                    note.put("Content", Content);
 
                     documentReference.set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
