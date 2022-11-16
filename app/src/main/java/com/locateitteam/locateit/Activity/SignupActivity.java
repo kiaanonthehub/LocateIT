@@ -77,8 +77,8 @@ public class SignupActivity extends AppCompatActivity {
             // initialise variables
             firstname = etFirstname.getText().toString();
             lastname = etLastname.getText().toString();
-            email = etEmail.getText().toString();
-            password = etPassword.getText().toString();
+            email = etEmail.getText().toString().trim();
+            password = etPassword.getText().toString().trim();
 
 
             // method call to create a account

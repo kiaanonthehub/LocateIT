@@ -35,7 +35,6 @@ public class SettingsActivity extends AppCompatActivity {
     Button btnSave;
     Button  btnLogout;
     Button btnShare;
-    Button btnLevel1;
     Switch swActivate;
 
     @Override
@@ -137,40 +136,6 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(intent,"Share Using"));
             }
         });
-
-        // level feature
-        btnLevel1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mIntent = getIntent();
-                int number_of_saved_locations = mIntent.getIntExtra("intVariableName", 0);
-
-                if(number_of_saved_locations>=1 && number_of_saved_locations<3)
-                {
-                    Toast.makeText(SettingsActivity.this, "Level 1", Toast.LENGTH_SHORT).show();
-                }
-                if(number_of_saved_locations>=3 && number_of_saved_locations<5)
-                {
-                    Toast.makeText(SettingsActivity.this, "Level 2", Toast.LENGTH_SHORT).show();
-                }
-                if(number_of_saved_locations>=5 && number_of_saved_locations<7)
-                {
-                    Toast.makeText(SettingsActivity.this, "Level 3", Toast.LENGTH_SHORT).show();
-                }
-                if(number_of_saved_locations>=7 && number_of_saved_locations<9)
-                {
-                    Toast.makeText(SettingsActivity.this, "Level 4", Toast.LENGTH_SHORT).show();
-                }
-                if(number_of_saved_locations>=9 && number_of_saved_locations<11)
-                {
-                    Toast.makeText(SettingsActivity.this, "Level 5", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-
-        });
-
-
     }
 
 
