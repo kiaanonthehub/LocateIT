@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -35,6 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
     Button btnSave;
     Button  btnLogout;
     Button btnShare;
+    Button btnLevel1;
     Switch swActivate;
 
     @Override
@@ -50,6 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
         swActivate = findViewById(R.id.switchActivtate);
         btnLogout = findViewById(R.id.btnLogout);
         btnShare = findViewById(R.id.btnShare);
+        btnLevel1 = findViewById(R.id.btnLevel1);
 
         // initilise adapter to read current settings from user in firebase
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SettingsActivity.this, R.array.MetricSelections, android.R.layout.simple_spinner_item);
@@ -122,8 +124,7 @@ public class SettingsActivity extends AppCompatActivity {
             logout();
         });
 
-        //Button btnShare= findViewById(R.id.btnShare);
-        // share app
+        // share app feature
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,6 +137,39 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(intent,"Share Using"));
             }
         });
+
+        // level feature
+        btnLevel1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = getIntent();
+                int number_of_saved_locations = mIntent.getIntExtra("intVariableName", 0);
+
+                if(number_of_saved_locations>=1 && number_of_saved_locations<3)
+                {
+                    Toast.makeText(SettingsActivity.this, "Level 1", Toast.LENGTH_SHORT).show();
+                }
+                if(number_of_saved_locations>=3 && number_of_saved_locations<5)
+                {
+                    Toast.makeText(SettingsActivity.this, "Level 2", Toast.LENGTH_SHORT).show();
+                }
+                if(number_of_saved_locations>=5 && number_of_saved_locations<7)
+                {
+                    Toast.makeText(SettingsActivity.this, "Level 3", Toast.LENGTH_SHORT).show();
+                }
+                if(number_of_saved_locations>=7 && number_of_saved_locations<9)
+                {
+                    Toast.makeText(SettingsActivity.this, "Level 4", Toast.LENGTH_SHORT).show();
+                }
+                if(number_of_saved_locations>=9 && number_of_saved_locations<11)
+                {
+                    Toast.makeText(SettingsActivity.this, "Level 5", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+
+        });
+
 
     }
 

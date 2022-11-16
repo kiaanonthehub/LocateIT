@@ -1,6 +1,8 @@
 package com.locateitteam.locateit.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +38,11 @@ public class SavedLocationsActivity extends AppCompatActivity {
         List<SavedPlaceModel> itemModelList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.savedRecyclerView);
 
+        int number_of_saved_locations = itemModelList.size();
+        Intent LevelIntent = new Intent(SavedLocationsActivity.this,SettingsActivity.class);
+        LevelIntent.putExtra("intVariableName", number_of_saved_locations);
+        startActivity(LevelIntent);
+
         // read from firebase
         FirebaseUtil.read_saved_locations.addValueEventListener(new ValueEventListener() {
             @Override
@@ -61,7 +68,9 @@ public class SavedLocationsActivity extends AppCompatActivity {
                         recyclerView.setAdapter(savedLocationsAdapter);
                         savedLocationsAdapter.notifyDataSetChanged();
                     }
+
                 }
+
             }
 
             @Override
