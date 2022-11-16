@@ -51,7 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
         swActivate = findViewById(R.id.switchActivtate);
         btnLogout = findViewById(R.id.btnLogout);
         btnShare = findViewById(R.id.btnShare);
-        btnLevel1 = findViewById(R.id.btnLevel1);
+        //btnLevel1 = findViewById(R.id.btnLevel1);
 
         // initilise adapter to read current settings from user in firebase
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SettingsActivity.this, R.array.MetricSelections, android.R.layout.simple_spinner_item);

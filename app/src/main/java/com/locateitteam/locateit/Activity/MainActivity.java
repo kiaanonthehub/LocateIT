@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity{
         user = fAuth.getCurrentUser();
 
         //Query query = fStore.collection("notes").document(CurrentUser.email).collection("myNotes").orderBy("title", Query.Direction.DESCENDING);
-        Query query = fStore.collection("notes").document(user.getUid()).collection("myNotes").orderBy("title", Query.Direction.DESCENDING);
+        Query query = fStore.collection("notes").document(user.getEmail()).collection("myNotes").orderBy("title", Query.Direction.DESCENDING);
         // query notes > uuid > mynotes
 
         FirestoreRecyclerOptions<Note> allNotes = new FirestoreRecyclerOptions.Builder<Note>()

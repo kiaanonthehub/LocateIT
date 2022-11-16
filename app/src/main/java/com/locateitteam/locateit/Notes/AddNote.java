@@ -63,7 +63,7 @@ public class AddNote extends AppCompatActivity {
 
                 // save note
                 //DocumentReference docref = fStore.collection("notes").document(CurrentUser.userId).collection("myNotes").document();
-                DocumentReference docref = fStore.collection("notes").document(user.getUid()).collection("myNotes").document();
+                DocumentReference docref = fStore.collection("notes").document(user.getEmail()).collection("myNotes").document();
                 Map<String,Object> note = new HashMap<>();
                 note.put("title",nTitle);
                 note.put("content",nContent);
