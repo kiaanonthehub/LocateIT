@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity{
     FirebaseFirestore fStore;
     FirestoreRecyclerAdapter<Note,NoteViewHolder> noteAdapter;
     FirebaseUser user;
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +68,11 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
 
         fStore = FirebaseFirestore.getInstance();
-        Query query = fStore.collection("notes").document(CurrentUser.email).collection("myNotes").orderBy("content", Query.Direction.DESCENDING);
-        //Query query = fStore.collection("Notes").document(user.getUid()).collection("myNotes").orderBy("Title", Query.Direction.DESCENDING);
+        fAuth = FirebaseAuth.getInstance();
+        user = fAuth.getCurrentUser();
+
+        //Query query = fStore.collection("notes").document(CurrentUser.email).collection("myNotes").orderBy("title", Query.Direction.DESCENDING);
+        Query query = fStore.collection("notes").document(user.getUid()).collection("myNotes").orderBy("title", Query.Direction.DESCENDING);
         // query notes > uuid > mynotes
 
         FirestoreRecyclerOptions<Note> allNotes = new FirestoreRecyclerOptions.Builder<Note>()
