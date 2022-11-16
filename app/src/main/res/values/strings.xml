@@ -16,6 +16,8 @@
     <string name="login2">Login</string>
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="api_key">cAIzaSyBYN_3H5YuJXZBKj58-fcn3l1Lj_UmTFCI</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
 
 
     <string-array name="MetricSelections">
