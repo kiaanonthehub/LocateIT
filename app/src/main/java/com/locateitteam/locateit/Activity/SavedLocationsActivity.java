@@ -1,5 +1,6 @@
 package com.locateitteam.locateit.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -37,6 +38,11 @@ public class SavedLocationsActivity extends AppCompatActivity {
         List<SavedPlaceModel> itemModelList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.savedRecyclerView);
 
+        int number_of_saved_locations = itemModelList.size();
+        Intent LevelIntent = new Intent(SavedLocationsActivity.this,SettingsActivity.class);
+        LevelIntent.putExtra("intVariableName", number_of_saved_locations);
+        startActivity(LevelIntent);
+
         // read from firebase
         FirebaseUtil.read_saved_locations.addValueEventListener(new ValueEventListener() {
             @Override
@@ -62,28 +68,9 @@ public class SavedLocationsActivity extends AppCompatActivity {
                         recyclerView.setAdapter(savedLocationsAdapter);
                         savedLocationsAdapter.notifyDataSetChanged();
                     }
+
                 }
-                int number = itemModelList.size();
-                if(number>=1 && number<3)
-                {
-                    Toast.makeText(SavedLocationsActivity.this, "Level 1", Toast.LENGTH_SHORT).show();
-                }
-                if(number>=3 && number<5)
-                {
-                    Toast.makeText(SavedLocationsActivity.this, "Level 2", Toast.LENGTH_SHORT).show();
-                }
-                if(number>=5 && number<7)
-                {
-                    Toast.makeText(SavedLocationsActivity.this, "Level 3", Toast.LENGTH_SHORT).show();
-                }
-                if(number>=7 && number<9)
-                {
-                    Toast.makeText(SavedLocationsActivity.this, "Level 4", Toast.LENGTH_SHORT).show();
-                }
-                if(number>=9 && number<11)
-                {
-                    Toast.makeText(SavedLocationsActivity.this, "Level 5", Toast.LENGTH_SHORT).show();
-                }
+
             }
 
             @Override
