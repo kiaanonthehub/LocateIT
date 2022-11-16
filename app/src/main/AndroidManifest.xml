@@ -17,13 +17,6 @@
         android:theme="@style/Theme.LocateIT"
         tools:targetApi="32">
         <activity
-            android:name=".Activity.CreateNotesActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
-        <activity
-            android:name=".Activity.NotesActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.SavedLocationsActivity"
             android:exported="false" />
         <activity
@@ -64,18 +57,18 @@
         <activity
             android:name=".Notes.AddNote"
             android:label="AddNote"
-            android:parentActivityName=".Activity.MainActivity"
+            android:parentActivityName=".Activity.NotesActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.locateitteam.locateit.Activity.MainActivity" />
+                android:value="com.locateitteam.locateit.Activity.NotesActivity" />
         </activity>
         <activity
             android:name=".Notes.NoteDetails"
             android:label="NoteDetails"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".Activity.NotesActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

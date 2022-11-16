@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.locateitteam.locateit.Activity.MainActivity;
+import com.locateitteam.locateit.Activity.NotesActivity;
 import com.locateitteam.locateit.R;
 
 import java.util.HashMap;
@@ -81,7 +81,7 @@ public class EditNote extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(EditNote.this, "Note Saved.", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), NotesActivity.class));
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {

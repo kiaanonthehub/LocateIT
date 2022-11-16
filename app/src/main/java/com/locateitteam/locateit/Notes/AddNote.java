@@ -21,11 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.locateitteam.locateit.Activity.HelpActivity;
-import com.locateitteam.locateit.Activity.MainActivity;
-import com.locateitteam.locateit.Activity.MapsActivity;
+import com.locateitteam.locateit.Activity.NotesActivity;
 import com.locateitteam.locateit.R;
-import com.locateitteam.locateit.Util.CurrentUser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -76,7 +73,7 @@ public class AddNote extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(AddNote.this, "Note Added.", Toast.LENGTH_SHORT).show();
                         //onBackPressed();
-                        Intent intent = new Intent (AddNote.this, MainActivity.class);
+                        Intent intent = new Intent (AddNote.this, NotesActivity.class);
                         startActivity(intent);
 
                     }
