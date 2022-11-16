@@ -38,11 +38,6 @@ public class SavedLocationsActivity extends AppCompatActivity {
         List<SavedPlaceModel> itemModelList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.savedRecyclerView);
 
-        int number_of_saved_locations = itemModelList.size();
-        Intent LevelIntent = new Intent(SavedLocationsActivity.this,SettingsActivity.class);
-        LevelIntent.putExtra("intVariableName", number_of_saved_locations);
-        startActivity(LevelIntent);
-
         // read from firebase
         FirebaseUtil.read_saved_locations.addValueEventListener(new ValueEventListener() {
             @Override
