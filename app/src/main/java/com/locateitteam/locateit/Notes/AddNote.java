@@ -1,5 +1,6 @@
 package com.locateitteam.locateit.Notes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.locateitteam.locateit.Activity.HelpActivity;
+import com.locateitteam.locateit.Activity.MainActivity;
+import com.locateitteam.locateit.Activity.MapsActivity;
 import com.locateitteam.locateit.R;
 import com.locateitteam.locateit.Util.CurrentUser;
 
@@ -71,7 +75,9 @@ public class AddNote extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(AddNote.this, "Note Added.", Toast.LENGTH_SHORT).show();
-                        onBackPressed();
+                        //onBackPressed();
+                        Intent intent = new Intent (AddNote.this, MainActivity.class);
+                        startActivity(intent);
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {

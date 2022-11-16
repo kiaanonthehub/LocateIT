@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity{
                         menu.getMenu().add("Delete").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
-                                DocumentReference docRef = fStore.collection("Notes").document(CurrentUser.userId).collection("myNotes").document(docId);
+                                DocumentReference docRef = fStore.collection("notes").document(user.getEmail()).collection("myNotes").document(docId);
                                 docRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {

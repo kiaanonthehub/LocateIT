@@ -4,53 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.SettingsActivity"
-    android:background="@drawable/bg_gradient">
+    android:background="@drawable/bg_gradient"
+    tools:context=".Activity.SettingsActivity">
+
+    <Spinner
+        android:id="@+id/spinnerMapType"
+        android:layout_width="338dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_white_rounded"
+        android:contentDescription="@string/app_name"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.262" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Unit of Measurement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
 
     <Spinner
         android:id="@+id/spinnerMetricSetting"
+        style="@style/Widget.AppCompat.Spinner.DropDown"
         android:layout_width="338dp"
         android:layout_height="48dp"
-        android:dropDownHeight="match_parent"
-        android:background="@drawable/bg_white_rounded"
         android:layout_marginTop="85dp"
         android:layout_marginBottom="192dp"
+        android:background="@drawable/bg_white_rounded"
         android:contentDescription="@string/app_name"
+        android:dropDownHeight="match_parent"
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toTopOf="@+id/switchActivtate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.125" />
+        app:layout_constraintVertical_bias="1.0" />
 
-    <Spinner
-        android:id="@+id/spinnerMapType"
-        android:layout_width="338dp"
-        android:layout_height="48dp"
-        android:contentDescription="@string/app_name"
-        android:background="@drawable/bg_white_rounded"
-        android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Mode of Travel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.235" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerMapType">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Map Type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerMetricSetting">
+
+    </TextView>
 
     <Spinner
         android:id="@+id/spinnerTravelType"
         android:layout_width="338dp"
         android:layout_height="48dp"
-        android:contentDescription="@string/app_name"
         android:background="@drawable/bg_white_rounded"
+        android:contentDescription="@string/app_name"
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.346" />
+        app:layout_constraintVertical_bias="0.382" />
 
     <TextView
         android:id="@+id/textViewLogin"
@@ -63,7 +99,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintVertical_bias="0.024" />
 
     <Button
         android:id="@+id/btnSaveSettings"
@@ -92,7 +128,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.693" />
 
-    <Switch
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switchActivtate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,17 +136,19 @@
         android:text="Activate Settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.138"
+        app:layout_constraintHorizontal_bias="0.143"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.458" />
+        app:layout_constraintVertical_bias="0.499" />
 
     <Button
         android:id="@+id/btnShare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Share Me Hoe"
+        android:drawableLeft="@drawable/ic_baseline_share_24"
+        android:drawableTint="@color/white"
+        android:text="Share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
