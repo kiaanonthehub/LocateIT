@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <item android:title="Quick Access">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_home"
+                    android:icon="@drawable/ic_baseline_home_24"
+                    android:title="Home" />
+
+                <item
+                    android:id="@+id/sv_places"
+                    android:icon="@drawable/ic_bookmark"
+                    android:title="Saved Places" />
+
+            </group>
+
+        </menu>
+    </item>
+
+    <item android:title="Travel Notes">
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_notes"
+                    android:icon="@drawable/ic_baseline_note_24"
+                    android:title="Notes" />
+                <item
+                    android:id="@+id/addNote"
+                    android:icon="@drawable/ic_baseline_note_add_24"
+                    android:title="Add Note" />
+            </group>
+        </menu>
+    </item>
+
+
+    <item android:title="Support">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_help"
+                    android:icon="@drawable/ic_help"
+                    android:title="Help" />
+                <item
+                    android:id="@+id/nav_share"
+                    android:icon="@drawable/ic_baseline_share_24"
+                    android:title="Share App" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Logout">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_logout"
+                    android:title="Logout" />
+            </group>
+        </menu>
+    </item>
+
+</menu>
+
